@@ -3,10 +3,6 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
-import java.util.ArrayList;
-
-import Databases.SQLiteClass;
-import org.json.JSONObject;
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
