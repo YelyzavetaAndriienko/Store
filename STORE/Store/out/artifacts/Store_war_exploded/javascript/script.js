@@ -56,6 +56,7 @@ function addGroup()
     jsonData.name = $('#name').val();
     jsonData.description = $('#description').val();
 
-    serverU = window.location.href;
-    serverConnectFunc(serverU, JSON.stringify(jsonData));
+    let serverU = window.location.href;
+    let dataJ = "{\"name\": " + $('#name').val() + ", \"description\": " + $('#description').val() + "}";
+    serverConnectFunc(serverU, dataJ);
 }
