@@ -193,34 +193,48 @@ public class Database {
     }
 
     public static void updateGroup(int id, String name, String description) {
+        if (name.equals("")){
+            throw new NullPointerException("Enter correct name of the group");
+        }
+        Group readGroup = readGroup(id);
+        if (readGroup == null) {
+            throw new NullPointerException("There is no group with such id!");
+        }
         String sql = "UPDATE " + groupsTable + " SET groupName = ? , "
                 + "groupDescription = ? "
                 + "WHERE groupId = ?";
-
         try (PreparedStatement st = con.prepareStatement(sql)) {
-            List<Group> groups = readGroups();
-            boolean groupExist = false;
-            for (int i = 0; i < groups.size(); i++) {
-                if (id == groups.get(i).getId())
-                    groupExist = true;
-            }
-            if (name.equals(""))
-                throw new NullPointerException("Enter correct name of the group");
-            else
-                st.setString(1, name);
+            st.setString(1, name);
             st.setString(2, description);
-            if (groupExist == true)
-                st.setInt(3, id);
-            else
-                throw new NullPointerException("Enter correct id of the group");
-            st.executeUpdate();
+            st.setInt(3, id);
+            if (groupNameIsUnique(name) || readGroup.getName().equals(name)) {
+                st.executeUpdate();
+            } else {
+                System.out.println("Name for group is not unique!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Can't update group", e);
         }
     }
 
-    public static void updateProduct(int id, int groupId, String name, String description, String manufacturer, int amount, double price) {
+    public static void updateProduct(int id, int groupId, String name,
+                                     String description, String manufacturer, int amount,
+                                     double price) {
+        if (name.equals(""))
+            throw new NullPointerException("Enter correct name of the product");
+        if (amount < 0)
+            throw new NullPointerException("Enter correct amount of the product");
+        if (price < 0)
+            throw new NullPointerException("Enter correct price of the product");
+        Product readProduct = readProduct(id);
+        if (readProduct == null) {
+            throw new NullPointerException("There is no product with such id!");
+        }
+        Group readGroup = readGroup(groupId);
+        if (readGroup == null) {
+            throw new NullPointerException("There is no group with such id!");
+        }
         String sql = "UPDATE " + productsTable + " SET gId = ?, "
                 + "name = ? , "
                 + "description = ? , "
@@ -228,48 +242,19 @@ public class Database {
                 + "amount = ? , "
                 + "price = ? "
                 + "WHERE id = ?";
-
         try (PreparedStatement st = con.prepareStatement(sql)) {
-            List<Product> products = readProducts();
-            boolean productExist = false;
-
-            for (int i = 0; i < products.size(); i++) {
-                if (id == products.get(i).getId())
-                    productExist = true;
-            }
-
-            List<Group> groups = readGroups();
-            boolean groupExist = false;
-
-            for (int i = 0; i < groups.size(); i++) {
-                if (groupId == groups.get(i).getId())
-                    groupExist = true;
-            }
-
-            if (groupExist == true)
-                st.setInt(1, groupId);
-            else
-                st.setInt(1, readProduct(id).getGId());
-            if (name.equals(""))
-                throw new NullPointerException("Enter correct name of the product");
-            else
-                st.setString(2, name);
+            st.setInt(1, groupId);
+            st.setString(2, name);
             st.setString(3, description);
             st.setString(4, manufacturer);
-            if (amount >= 0)
-                st.setInt(5, amount);
-            else
-                throw new NullPointerException("Enter correct amount of the product");
-            if (amount >= 0)
-                st.setDouble(6, price);
-            else
-                throw new NullPointerException("Enter correct price of the product");
-            if (productExist == true)
-                st.setInt(7, id);
-            else
-                throw new NullPointerException("Enter correct id of the product");
-
-            st.executeUpdate();
+            st.setInt(5, amount);
+            st.setDouble(6, price);
+            st.setInt(7, id);
+            if (productNameIsUnique(name) || readProduct.getName().equals(name)) {
+                st.executeUpdate();
+            } else {
+                System.out.println("Name for product is not unique!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Can't update product", e);
