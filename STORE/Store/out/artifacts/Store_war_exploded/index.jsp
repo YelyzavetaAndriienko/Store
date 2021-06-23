@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Liza
@@ -334,7 +335,6 @@
     <div id="div2">STORE</div>
     <div id="div3"></div>
 </div>
-
 <div id="menuDiv">
     <header>
         <nav>
@@ -369,7 +369,6 @@
     </header>
 
 </div>
-
 <div id="mainDiv">
     <div class="form-row">
         <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>

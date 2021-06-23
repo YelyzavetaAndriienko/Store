@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServlet;
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
-    private Database database;
+    //private Database database;
+    //private static Database database = new Database();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +38,6 @@ public class MainServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("There is doPost");
-        database = new Database();
         StringBuilder jb = new StringBuilder();
         String line = null;
 
@@ -49,6 +49,8 @@ public class MainServlet extends HttpServlet {
             System.out.println(e.toString());
         }
 
+        Database database = new Database();
+        database.deleteGroups();
         try {
             JSONObject jsonObject = new JSONObject(jb.toString());
 
@@ -95,9 +97,11 @@ public class MainServlet extends HttpServlet {
                     out.println(jsonToReturn1.toString());
                     System.out.println(jsonToReturn1.toString());
 
+                    System.out.println(database.readGroups());
+
                     String text = jsonToReturn1.toString() + "\n  ------- \n" + group.toString();
 
-                    try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Khrys\\Documents\\notes.txt")) {
+                    try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Liza\\Documents\\notes.txt")) {
                         // перевод строки в байты
                         byte[] buffer = text.getBytes();
 
@@ -115,6 +119,7 @@ public class MainServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        database.close();
         /*
         try {
             database.close();

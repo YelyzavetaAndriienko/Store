@@ -17,7 +17,7 @@ public class Database {
     public Database() {
         Conn();
         initTables();
-        close();
+        //close();
     }
 
     public static void Conn(){
@@ -110,7 +110,7 @@ public class Database {
     }
 
     public static Group createGroup(Group group) {
-        Conn();
+       // Conn();
         if (group.getName().equals(""))
             throw new NullPointerException("Enter correct name of the group");
         if (groupNameIsUnique(group.getName())) {
@@ -599,61 +599,12 @@ public class Database {
 
     public static void close() {
         try {
+            //deleteGroups();
             con.close();
             System.out.println("Connection closed");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        Database database = new Database();
-
-        Group group1 = new Group(1, "fruits", "smth1group");
-        Group group2 = new Group(2, "vegetables", "smth2group");
-        Group group3 = new Group(3, "clothes", "smth3group");
-
-
-        database.createGroup(group1);
-        database.createGroup(group2);
-        database.createGroup(group3);
-
-/*
-        database.updateGroup(group3.getId(), "shoes", "12345");
-
-        GroupFilter filterG = new GroupFilter(null, "smth");
-        System.out.println(database.listByCriteriaGroup(filterG));
-
-        System.out.println(database.listByCriteriaGroup(new GroupFilter(null, null)));
-
-        //database.deleteGroup(database.readGroup(group3.getId()).getName());
-        //database.deleteGroups();
-
-        //System.out.println(database.readGroups());
-
-        Product product1 = new Product(group1.getId(), "prod1", "smth", "Ukr", 5, 23.30);
-        Product product2 = new Product(group2.getId(), "prod2", "smth2", "Ekvador", 2, 33.0);
-        Product product3 = new Product(group1.getId(), "other", "smthothe", "ua", 10, 104.21);
-
-        database.createProduct(product1);
-        database.createProduct(product2);
-        database.createProduct(product3);*/
-/*
-        System.out.println(database.readProducts());
-        database.updateProduct(product3.getId(), 4, "appleUPD", "smth1UPD", "UkraineUPD", 100, 0.1);
-
-        ProductFilter filter = new ProductFilter("prod", null, null, null, null, null, null);
-        System.out.println(database.listByCriteriaProduct(filter));
-
-        System.out.println(database.listByCriteriaProduct(new ProductFilter(null, null, null, null, null, null, null)));
-        //database.deleteProduct(database.readGroup(group3.getId()).getName());
-        //database.deleteGroups();
-
-        System.out.println(database.readProducts());
-        System.out.println("------------------------------------");
-
-        database.deleteGroup(group1.getId());
-        System.out.println(database.readProducts());*/
     }
 
 }
