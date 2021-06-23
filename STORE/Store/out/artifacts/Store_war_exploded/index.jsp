@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+    <script type="text/javascript" src="resources/script.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
@@ -30,7 +30,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!--<script src="javascript/script.js"></script>-->
     <style>
         *{
             padding:0;
@@ -91,7 +90,6 @@
         header {
             background: white;
             text-align: center;
-            border: 1px solid black;
         }
         header a {
             display: block;
@@ -132,7 +130,6 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 20px;
             font-weight: 400;
-            border: 1px solid red;
         }
         .topmenu > li > a {
             text-transform: uppercase;
@@ -374,89 +371,19 @@
 </div>
 
 <div id="mainDiv">
-    <form method="post">
     <div class="form-row">
         <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
     </div>
     <div class="form-row">
         <input type="text" id="description" required autocomplete="off"><label for="description">Description</label>
     </div>
-        <div class="buttonOk">
-            <input type="submit" class="floating-button" value="Ok" onclick="addGroup()">
-        </div>
-    </form>
 </div>
-<!--
+
 <div id="bottom">
-    <div class="buttonOk">
-        <a href="" class="floating-button">Ok</a>
+    <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
+        <a href="" class="floating-button" onclick="addGroup()">Ok</a>
     </div>
 </div>
--->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
 
-    var serverHostName = window.location.hostname;
-
-    var serverProtocolName = window.location.protocol;
-
-    var portName = window.location.port;
-
-    if (portName.length == 0) {
-        portName = "8080";
-    }
-
-    if (serverHostName === "localhost")
-    {
-        serverPath = serverProtocolName + "//" + serverHostName + ":" + portName + "/Store/";
-    }
-    else
-    {
-        serverPath = serverProtocolName + "//" + serverHostName;
-    }
-
-    function serverConnectFunc(serverUrl, jsonData) {
-        $.ajax({
-            url: serverUrl + "/",
-            type: 'POST',
-            data: jsonData,
-
-            dataType: 'json',
-            async: true,
-
-            success: function (event) {
-                switch (event["answer"])
-                {
-                    case "ok":
-                        alert("success");
-                        break;
-                }
-            },
-            error: function (xhr, status, error) {
-                alert(error);
-            }
-        });
-    }
-
-    function showAllNames()
-    {
-        var jsonData = new Object();
-        jsonData.command = "0";
-
-        serverConnectFunc(serverPath, JSON.stringify(jsonData));
-    }
-
-    function addGroup()
-    {
-        var jsonData = new Object();
-        jsonData.command = "1";
-        jsonData.name = $('#name').val();
-        jsonData.description = $('#description').val();
-
-        let serverU = window.location.href;
-        let dataJ = "{\"name\": " + $('#name').val() + ", \"description\": " + $('#description').val() + "}";
-        serverConnectFunc(serverU, dataJ);
-    }
-</script>
 </body>
 </html>

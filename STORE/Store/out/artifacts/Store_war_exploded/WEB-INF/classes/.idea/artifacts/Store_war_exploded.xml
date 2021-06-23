@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Store:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Store_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Store" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.json:json:20141113" />
+          <element id="library" level="project" name="Maven: org.xerial:sqlite-jdbc:3.8.11.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Store/web/Web" />
+    </root>
+  </artifact>
+</component>
