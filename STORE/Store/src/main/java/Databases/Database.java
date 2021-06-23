@@ -296,7 +296,7 @@ public class Database {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Can't delete item", e);
+            throw new RuntimeException("Can't delete product", e);
         }
     }
 
@@ -448,6 +448,26 @@ public class Database {
         } catch (SQLException e) {
             System.out.println("Invalid SQL request");
             throw new RuntimeException("Can't select products", e);
+        }
+    }
+
+    public void dropProductsTable() {
+        try {
+            final Statement statement = con.createStatement();
+            String query = "drop table if exists " + productsTable;
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't drop products table", e);
+        }
+    }
+
+    public void dropGroupsTable() {
+        try {
+            final Statement statement = con.createStatement();
+            String query = "drop table if exists " + groupsTable;
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't drop groups table", e);
         }
     }
 
