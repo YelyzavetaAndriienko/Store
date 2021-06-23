@@ -18,9 +18,10 @@ import javax.servlet.http.HttpServlet;
 public class MainServlet extends HttpServlet {
     private Database database;
 
-@Override
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("There is doGet");
 
         response.setContentType("text/html");
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
@@ -35,6 +36,7 @@ public class MainServlet extends HttpServlet {
     }*/
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("There is doPost");
         database = new Database();
         StringBuilder jb = new StringBuilder();
         String line = null;
@@ -86,23 +88,21 @@ public class MainServlet extends HttpServlet {
                     String description = jsonObject.getString("description");
 
                     Group group = new Group(name, description);
-System.out.println(group.toString());
+                    System.out.println(group);
                     database.createGroup(group);
                     JSONObject jsonToReturn1 = new JSONObject();
                     jsonToReturn1.put("answer", "ok");
                     out.println(jsonToReturn1.toString());
                     System.out.println(jsonToReturn1.toString());
 
-                        String text = jsonToReturn1.toString() + "\n  ------- \n" + group.toString();
+                    String text = jsonToReturn1.toString() + "\n  ------- \n" + group.toString();
 
-                    try(FileOutputStream fos=new FileOutputStream("C:\\Users\\Liza\\Documents\\notes.txt"))
-                    {
+                    try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Khrys\\Documents\\notes.txt")) {
                         // перевод строки в байты
                         byte[] buffer = text.getBytes();
 
                         fos.write(buffer, 0, buffer.length);
-                    }
-                    catch(IOException ex){
+                    } catch (IOException ex) {
 
                         System.out.println(ex.getMessage());
                     }
