@@ -158,16 +158,10 @@ nav li a{
   width: 82.1vw;
   margin: 0 auto;
   margin-top: 6.483vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 .groupSelection {
    margin-bottom: 3.24vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 .selection {
   border-radius: 45px;
@@ -181,6 +175,50 @@ nav li a{
 }
 .selection:focus{
 outline:none;
+}
+
+
+.form-row {
+   position: relative;
+   margin-bottom: 3.24vh;
+}
+.form-row input {
+   display: block;
+   width: 97%;
+   padding: 0 10px;
+   line-height: 6.48vh;
+   font-family: 'Montserrat', sans-serif;
+   font-weight: 400;
+  font-size: 15px;
+   background: none;
+   border-width: 0;
+   border-bottom: 2px solid #404040;
+   transition: all 0.2s ease;
+}
+.form-row label {
+   position: absolute;
+   left: 13px;
+   color: #9d959d;
+   font-size: 20px;
+   font-weight: 300;
+   transform: translateY(-35px);
+   transition: all 0.2s ease;
+   font-family: 'Montserrat', sans-serif;
+   font-weight: 400;
+  font-size: 15px;
+}
+.form-row input:focus {
+   outline: 0;
+   border-color: #F77A52;
+}
+.form-row input:focus+label, .form-row input:valid+label {
+   transform: translateY(-60px);
+   margin-left: -14px;
+   font-size: 14px;
+   font-weight: 400;
+   outline: 0;
+   border-color: #F77A52;
+   color: #F77A52;
 }
 
 
@@ -265,8 +303,14 @@ outline:none;
     <option value="group1">Group 1</option>
    </select>
    </div>
+
+<!--This amount + amount that already exist-->
+   <div class="form-row">
+       <input type="number" id="amount" required autocomplete="off"><label for="amount">Add some amount</label>
+    </div>
+
    <div class="buttonOk">
-      <input type="submit" class="floating-button" value="Delete">
+      <input type="submit" class="floating-button" value="Ok">
    </div>
  </form>
 </div>
