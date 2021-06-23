@@ -117,7 +117,6 @@ public class Database {
     }
 
     public static Group createGroup(Group group) {
-        //Conn();
         if (group.getName().equals(""))
             throw new NullPointerException("Enter correct name of the group");
         if (groupNameIsUnique(group.getName())) {
@@ -143,7 +142,6 @@ public class Database {
     }
 
     public static Product createProduct(Product product) {
-        Conn();
         if (product.getName().equals(""))
             throw new NullPointerException("Enter correct name of the product");
         if (product.getAmount() < 0)
@@ -155,7 +153,7 @@ public class Database {
             throw new NullPointerException("There is no group with such id!");
         }
         if (productNameIsUnique(product.getName())) {
-            try (PreparedStatement statement = con.prepareStatement("INSERT INTO " + productsTable + "(gId, name, description, manufacturer, amount, price) VALUES (?, ?, ?, ?, ?, ?)")) {
+            try (PreparedStatement statement = con.prepareStatement("INSERT INTO " + productsTable + "('gId', 'name', 'description', 'manufacturer', 'amount', 'price') VALUES (?, ?, ?, ?, ?, ?)")) {
                 statement.setInt(1, product.getGId());
                 statement.setString(2, product.getName());
                 statement.setString(3, product.getDescription());
@@ -165,6 +163,7 @@ public class Database {
                 statement.executeUpdate();
                 ResultSet resultSet = statement.getGeneratedKeys();
                 product.setId(resultSet.getInt("last_insert_rowid()"));
+                con.commit();
                 statement.close();
                 resultSet.close();
                 return product;
