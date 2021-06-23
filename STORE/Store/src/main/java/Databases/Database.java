@@ -19,7 +19,7 @@ public class Database {
         initTables();
     }
 
-    public static void Conn(){
+    public static void Conn() {
         System.out.println("get connection");
         try {
             Class.forName("org.sqlite.JDBC");
@@ -34,14 +34,14 @@ public class Database {
         }
     }
 
-    private static void initTables(){
+    private static void initTables() {
         System.out.println("init tables");
         try {
             final Statement groupST = con.createStatement();
-                    String query = "create table if not exists " + groupsTable +
-                            " ('groupId' INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            " 'groupName' text," +
-                            " 'groupDescription' text);";
+            String query = "create table if not exists " + groupsTable +
+                    " ('groupId' INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    " 'groupName' text," +
+                    " 'groupDescription' text);";
             groupST.execute(query);
             final Statement productST = con.createStatement();
             query = "create table if not exists " + productsTable +
@@ -100,14 +100,15 @@ public class Database {
     }
 
     public static User createUser(User user) {
-        try (PreparedStatement statement = con.prepareStatement("INSERT INTO users(login, password) VALUES (?, ?)")) {
+        try (PreparedStatement statement = con.prepareStatement("INSERT INTO users('login', 'password') VALUES (?, ?)")) {
             statement.setString(1, user.getLogin());
             statement.setString(2, DigestUtils.md5Hex(user.getPassword()));
-
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             user.setId(resultSet.getInt("last_insert_rowid()"));
-
+            con.commit();
+            statement.close();
+            resultSet.close();
             return user;
         } catch (SQLException e) {
             System.out.println("Can't insert user");
@@ -117,7 +118,6 @@ public class Database {
     }
 
     public static Group createGroup(Group group) {
-        //Conn();
         if (group.getName().equals(""))
             throw new NullPointerException("Enter correct name of the group");
         if (groupNameIsUnique(group.getName())) {
@@ -143,7 +143,6 @@ public class Database {
     }
 
     public static Product createProduct(Product product) {
-        Conn();
         if (product.getName().equals(""))
             throw new NullPointerException("Enter correct name of the product");
         if (product.getAmount() < 0)
@@ -155,7 +154,7 @@ public class Database {
             throw new NullPointerException("There is no group with such id!");
         }
         if (productNameIsUnique(product.getName())) {
-            try (PreparedStatement statement = con.prepareStatement("INSERT INTO " + productsTable + "(gId, name, description, manufacturer, amount, price) VALUES (?, ?, ?, ?, ?, ?)")) {
+            try (PreparedStatement statement = con.prepareStatement("INSERT INTO " + productsTable + "('gId', 'name', 'description', 'manufacturer', 'amount', 'price') VALUES (?, ?, ?, ?, ?, ?)")) {
                 statement.setInt(1, product.getGId());
                 statement.setString(2, product.getName());
                 statement.setString(3, product.getDescription());
@@ -165,6 +164,7 @@ public class Database {
                 statement.executeUpdate();
                 ResultSet resultSet = statement.getGeneratedKeys();
                 product.setId(resultSet.getInt("last_insert_rowid()"));
+                con.commit();
                 statement.close();
                 resultSet.close();
                 return product;
@@ -183,7 +183,10 @@ public class Database {
         try (Statement st = con.createStatement();
              ResultSet resultSet = st.executeQuery("SELECT * FROM users where login = '" + login + "'");) {
             if (resultSet.next()) {
-                return new User(resultSet.getInt("userId"), resultSet.getString("login"), resultSet.getString("password"));
+                User user = new User(resultSet.getInt("userId"), resultSet.getString("login"), resultSet.getString("password"));
+                st.close();
+                resultSet.close();
+                return user;
             }
             return null;
         } catch (SQLException e) {
@@ -195,7 +198,7 @@ public class Database {
     // return group object
     // if there is no group with such id - return null
     public static Group readGroup(int id) {
-        Conn();
+        //Conn();
         try {
             final PreparedStatement selectStatement = con.prepareStatement(
                     "select * from " + groupsTable + " where groupId = ?");
@@ -217,7 +220,7 @@ public class Database {
     // return product object
     // if there is no product with such id - return null
     public static Product readProduct(int id) {
-        Conn();
+        //Conn();
         try {
             final PreparedStatement selectStatement = con.prepareStatement(
                     "select * from " + productsTable + " where id = ?");
@@ -237,7 +240,7 @@ public class Database {
     }
 
     public static List<Group> readGroups() {
-        Conn();
+        //Conn();
         try (Statement st = con.createStatement();
              ResultSet resultSet = st.executeQuery("SELECT * FROM " + groupsTable)) {
             List<Group> groupsList = new ArrayList<>();
@@ -254,7 +257,7 @@ public class Database {
     }
 
     public static List<Product> readProducts() {
-        Conn();
+        //Conn();
         try (Statement st = con.createStatement();
              ResultSet resultSet = st.executeQuery("SELECT * FROM " + productsTable)) {
             List<Product> products = new ArrayList<>();
@@ -271,8 +274,8 @@ public class Database {
     }
 
     public static void updateGroup(int id, String name, String description) {
-        Conn();
-        if (name.equals("")){
+        //Conn();
+        if (name.equals("")) {
             throw new NullPointerException("Enter correct name of the group");
         }
         Group readGroup = readGroup(id);
@@ -288,10 +291,12 @@ public class Database {
             st.setInt(3, id);
             if (groupNameIsUnique(name) || readGroup.getName().equals(name)) {
                 st.executeUpdate();
+                con.commit();
+                st.close();
             } else {
                 System.out.println("Name for group is not unique!");
+                st.close();
             }
-            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Can't update group", e);
@@ -301,7 +306,7 @@ public class Database {
     public static void updateProduct(int id, int groupId, String name,
                                      String description, String manufacturer, int amount,
                                      double price) {
-        Conn();
+        //Conn();
         if (name.equals(""))
             throw new NullPointerException("Enter correct name of the product");
         if (amount < 0)
@@ -333,10 +338,12 @@ public class Database {
             st.setInt(7, id);
             if (productNameIsUnique(name) || readProduct.getName().equals(name)) {
                 st.executeUpdate();
+                con.commit();
+                st.close();
             } else {
                 System.out.println("Name for product is not unique!");
+                st.close();
             }
-            st.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Can't update product", e);
@@ -344,11 +351,12 @@ public class Database {
     }
 
     public static void deleteAllProductsInGroup(final int groupId) {
-        Conn();
+        // Conn();
         try {
             final Statement statement = con.createStatement();
             String query = String.format("delete from " + productsTable + " where gId = '%s'", groupId);
             statement.execute(query);
+            con.commit();
             statement.close();
         } catch (SQLException e) {
             throw new RuntimeException("Can't delete products", e);
@@ -356,10 +364,11 @@ public class Database {
     }
 
     public static void deleteGroup(int id) {
-        Conn();
+        // Conn();
         try (PreparedStatement st = con.prepareStatement("DELETE FROM " + groupsTable + " WHERE groupId = ?")) {
             st.setInt(1, id);
             int isDeleted = st.executeUpdate();
+            con.commit();
             st.close();
             if (isDeleted != 1) {
                 System.out.println("Group doesn't exist with such id");
@@ -373,10 +382,11 @@ public class Database {
     }
 
     public static void deleteProduct(int id) {
-        Conn();
+        // Conn();
         try (PreparedStatement st = con.prepareStatement("DELETE FROM " + productsTable + " WHERE id = ?")) {
             st.setInt(1, id);
             int isDeleted = st.executeUpdate();
+            con.commit();
             st.close();
             if (isDeleted != 1) {
                 System.out.println("Product doesn't exist with such id");
@@ -389,9 +399,10 @@ public class Database {
     }
 
     public static void deleteGroups() {
-        Conn();
+        // Conn();
         try (PreparedStatement st = con.prepareStatement("DELETE FROM " + groupsTable)) {
             st.executeUpdate();
+            con.commit();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -399,6 +410,7 @@ public class Database {
         }
         try (PreparedStatement st = con.prepareStatement("UPDATE 'sqlite_sequence' SET 'seq' = 0 WHERE name = 'groups';")) {
             st.executeUpdate();
+            con.commit();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -408,9 +420,10 @@ public class Database {
     }
 
     public static void deleteProducts() {
-        Conn();
+        // Conn();
         try (PreparedStatement st = con.prepareStatement("DELETE FROM " + productsTable)) {
             st.executeUpdate();
+            con.commit();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -419,6 +432,7 @@ public class Database {
 
         try (PreparedStatement st = con.prepareStatement("UPDATE 'sqlite_sequence' SET 'seq' = 0 WHERE name = 'product';")) {
             st.executeUpdate();
+            con.commit();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -427,7 +441,7 @@ public class Database {
     }
 
     public static List<Group> listByCriteriaGroup(GroupFilter groupFilter) {
-        Conn();
+        // Conn();
         List<String> filters = new ArrayList<>();
 
         if (groupFilter.getName() != null)
@@ -456,7 +470,7 @@ public class Database {
     }
 
     public static List<Product> listByCriteriaProduct(ProductFilter productFilter) {
-        Conn();
+        // Conn();
         List<String> filters = new ArrayList<>();
 
         if (productFilter.getName() != null)
@@ -499,8 +513,8 @@ public class Database {
         }
     }
 
-    public static List<Product> getAllProductsFromGroup(int groupId){
-        Conn();
+    public static List<Product> getAllProductsFromGroup(int groupId) {
+        // Conn();
         List<Product> productsFromGroup = new ArrayList<>();
         try {
             PreparedStatement selectStatement = con.prepareStatement(
@@ -529,7 +543,7 @@ public class Database {
     }
 
     private static Product resultSetToProduct(ResultSet resultSet) throws SQLException {
-        Product p =  new Product(
+        Product p = new Product(
                 resultSet.getInt("id"),
                 resultSet.getInt("gId"),
                 resultSet.getString("name"),
@@ -542,7 +556,7 @@ public class Database {
     }
 
     public static boolean isEmptyGroup() {
-        Conn();
+        // Conn();
         try (Statement st = con.createStatement();
              ResultSet resultSet = st.executeQuery("SELECT * FROM " + groupsTable);) {
             List<Group> groups = new ArrayList<>();
@@ -562,7 +576,7 @@ public class Database {
     }
 
     public static boolean isEmptyProduct() {
-        Conn();
+        // Conn();
         try (Statement st = con.createStatement();
              ResultSet resultSet = st.executeQuery("SELECT * FROM " + productsTable);) {
             List<Product> products = new ArrayList<>();
@@ -582,11 +596,12 @@ public class Database {
     }
 
     public void dropProductsTable() {
-        Conn();
+        // Conn();
         try {
             final Statement statement = con.createStatement();
             String query = "drop table if exists " + productsTable;
             statement.executeUpdate(query);
+            con.commit();
             statement.close();
         } catch (SQLException e) {
             throw new RuntimeException("Can't drop products table", e);
@@ -594,11 +609,12 @@ public class Database {
     }
 
     public void dropGroupsTable() {
-        Conn();
+        // Conn();
         try {
             final Statement statement = con.createStatement();
             String query = "drop table if exists " + groupsTable;
             statement.executeUpdate(query);
+            con.commit();
             statement.close();
         } catch (SQLException e) {
             throw new RuntimeException("Can't drop groups table", e);
@@ -623,8 +639,8 @@ public class Database {
 
 
         //database.createGroup(group1);
-       // database.createGroup(group2);
-       // database.createGroup(group3);
+        // database.createGroup(group2);
+        // database.createGroup(group3);
 
 /*
         database.updateGroup(group3.getId(), "shoes", "12345");
