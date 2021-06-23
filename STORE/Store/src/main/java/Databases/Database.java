@@ -105,6 +105,10 @@ public class Database {
             throw new NullPointerException("Enter correct amount of the product");
         if (product.getPrice() < 0)
             throw new NullPointerException("Enter correct price of the product");
+        Group readGroup = readGroup(product.getGId());
+        if (readGroup == null) {
+            throw new NullPointerException("There is no group with such id!");
+        }
         if (productNameIsUnique(product.getName())) {
             try (PreparedStatement statement = con.prepareStatement("INSERT INTO " + productsTable + "(gId, name, description, manufacturer, amount, price) VALUES (?, ?, ?, ?, ?, ?)")) {
                 statement.setInt(1, product.getGId());
