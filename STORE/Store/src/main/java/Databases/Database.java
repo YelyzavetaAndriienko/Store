@@ -471,6 +471,15 @@ public class Database {
         }
     }
 
+    public void close() {
+        try {
+            con.close();
+            System.out.println("Connection closed");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         Database database = new Database();
 
