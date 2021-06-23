@@ -399,6 +399,23 @@ public class Database {
         }
     }
 
+    public List<Product> getAllProductsFromGroup(int groupId){
+        List<Product> productsFromGroup = new ArrayList<>();
+        try {
+            PreparedStatement selectStatement = con.prepareStatement(
+                    "select * from " + productsTable + " where group_id = ?");
+            selectStatement.setInt(1, groupId);
+            selectStatement.execute();
+            final ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                productsFromGroup.add(resultSetToProduct(resultSet));
+            }
+            return productsFromGroup;
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't get products", e);
+        }
+    }
+
     private static Group resultSetToGroup(ResultSet resultSet) throws SQLException {
         return new Group(
                 resultSet.getInt("groupId"),
