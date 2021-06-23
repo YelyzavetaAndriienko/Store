@@ -1,7 +1,9 @@
 package Databases;
 
-import Models.*;
-import org.apache.commons.codec.digest.DigestUtils;
+import Models.Group;
+import Models.GroupFilter;
+import Models.Product;
+import Models.ProductFilter;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -74,23 +76,6 @@ public class Database {
         }
     }
 
-    public static User createUser(User user) {
-        try (PreparedStatement statement = con.prepareStatement("INSERT INTO users(login, password) VALUES (?, ?)")) {
-            statement.setString(1, user.getLogin());
-            statement.setString(2, DigestUtils.md5Hex(user.getPassword()));
-
-            statement.executeUpdate();
-            ResultSet resultSet = statement.getGeneratedKeys();
-            user.setId(resultSet.getInt("last_insert_rowid()"));
-
-            return user;
-        } catch (SQLException e) {
-            System.out.println("Can't insert user");
-            e.printStackTrace();
-            throw new RuntimeException("Can't insert user", e);
-        }
-    }
-
     public static Group createGroup(Group group) {
         if (group.getName().equals(""))
             throw new NullPointerException("Enter correct name of the group");
@@ -120,6 +105,10 @@ public class Database {
             throw new NullPointerException("Enter correct amount of the product");
         if (product.getPrice() < 0)
             throw new NullPointerException("Enter correct price of the product");
+        Group readGroup = readGroup(product.getGId());
+        if (readGroup == null) {
+            throw new NullPointerException("There is no group with such id!");
+        }
         if (productNameIsUnique(product.getName())) {
             try (PreparedStatement statement = con.prepareStatement("INSERT INTO " + productsTable + "(gId, name, description, manufacturer, amount, price) VALUES (?, ?, ?, ?, ?, ?)")) {
                 statement.setInt(1, product.getGId());
@@ -140,19 +129,6 @@ public class Database {
         } else {
             System.out.println("Name is not unique for product!");
             return null;
-        }
-    }
-
-    public static User readUserByLogin(String login) {
-        try (Statement st = con.createStatement();
-             ResultSet resultSet = st.executeQuery("SELECT * FROM users where login = '" + login + "'");) {
-            if (resultSet.next()) {
-                return new User(resultSet.getInt("userId"), resultSet.getString("login"), resultSet.getString("password"));
-            }
-            return null;
-        } catch (SQLException e) {
-            System.out.println("Invalid SQL request");
-            throw new RuntimeException("Can't select user", e);
         }
     }
 
@@ -221,34 +197,48 @@ public class Database {
     }
 
     public static void updateGroup(int id, String name, String description) {
+        if (name.equals("")){
+            throw new NullPointerException("Enter correct name of the group");
+        }
+        Group readGroup = readGroup(id);
+        if (readGroup == null) {
+            throw new NullPointerException("There is no group with such id!");
+        }
         String sql = "UPDATE " + groupsTable + " SET groupName = ? , "
                 + "groupDescription = ? "
                 + "WHERE groupId = ?";
-
         try (PreparedStatement st = con.prepareStatement(sql)) {
-            List<Group> groups = readGroups();
-            boolean groupExist = false;
-            for (int i = 0; i < groups.size(); i++) {
-                if (id == groups.get(i).getId())
-                    groupExist = true;
-            }
-            if (name.equals(""))
-                throw new NullPointerException("Enter correct name of the group");
-            else
-                st.setString(1, name);
+            st.setString(1, name);
             st.setString(2, description);
-            if (groupExist == true)
-                st.setInt(3, id);
-            else
-                throw new NullPointerException("Enter correct id of the group");
-            st.executeUpdate();
+            st.setInt(3, id);
+            if (groupNameIsUnique(name) || readGroup.getName().equals(name)) {
+                st.executeUpdate();
+            } else {
+                System.out.println("Name for group is not unique!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Can't update group", e);
         }
     }
 
-    public static void updateProduct(int id, int groupId, String name, String description, String manufacturer, int amount, double price) {
+    public static void updateProduct(int id, int groupId, String name,
+                                     String description, String manufacturer, int amount,
+                                     double price) {
+        if (name.equals(""))
+            throw new NullPointerException("Enter correct name of the product");
+        if (amount < 0)
+            throw new NullPointerException("Enter correct amount of the product");
+        if (price < 0)
+            throw new NullPointerException("Enter correct price of the product");
+        Product readProduct = readProduct(id);
+        if (readProduct == null) {
+            throw new NullPointerException("There is no product with such id!");
+        }
+        Group readGroup = readGroup(groupId);
+        if (readGroup == null) {
+            throw new NullPointerException("There is no group with such id!");
+        }
         String sql = "UPDATE " + productsTable + " SET gId = ?, "
                 + "name = ? , "
                 + "description = ? , "
@@ -256,48 +246,19 @@ public class Database {
                 + "amount = ? , "
                 + "price = ? "
                 + "WHERE id = ?";
-
         try (PreparedStatement st = con.prepareStatement(sql)) {
-            List<Product> products = readProducts();
-            boolean productExist = false;
-
-            for (int i = 0; i < products.size(); i++) {
-                if (id == products.get(i).getId())
-                    productExist = true;
-            }
-
-            List<Group> groups = readGroups();
-            boolean groupExist = false;
-
-            for (int i = 0; i < groups.size(); i++) {
-                if (groupId == groups.get(i).getId())
-                    groupExist = true;
-            }
-
-            if (groupExist == true)
-                st.setInt(1, groupId);
-            else
-                st.setInt(1, readProduct(id).getGId());
-            if (name.equals(""))
-                throw new NullPointerException("Enter correct name of the product");
-            else
-                st.setString(2, name);
+            st.setInt(1, groupId);
+            st.setString(2, name);
             st.setString(3, description);
             st.setString(4, manufacturer);
-            if (amount >= 0)
-                st.setInt(5, amount);
-            else
-                throw new NullPointerException("Enter correct amount of the product");
-            if (amount >= 0)
-                st.setDouble(6, price);
-            else
-                throw new NullPointerException("Enter correct price of the product");
-            if (productExist == true)
-                st.setInt(7, id);
-            else
-                throw new NullPointerException("Enter correct id of the product");
-
-            st.executeUpdate();
+            st.setInt(5, amount);
+            st.setDouble(6, price);
+            st.setInt(7, id);
+            if (productNameIsUnique(name) || readProduct.getName().equals(name)) {
+                st.executeUpdate();
+            } else {
+                System.out.println("Name for product is not unique!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Can't update product", e);
@@ -339,7 +300,7 @@ public class Database {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Can't delete item", e);
+            throw new RuntimeException("Can't delete product", e);
         }
     }
 
@@ -442,6 +403,23 @@ public class Database {
         }
     }
 
+    public List<Product> getAllProductsFromGroup(int groupId){
+        List<Product> productsFromGroup = new ArrayList<>();
+        try {
+            PreparedStatement selectStatement = con.prepareStatement(
+                    "select * from " + productsTable + " where group_id = ?");
+            selectStatement.setInt(1, groupId);
+            selectStatement.execute();
+            final ResultSet resultSet = selectStatement.executeQuery();
+            while (resultSet.next()) {
+                productsFromGroup.add(resultSetToProduct(resultSet));
+            }
+            return productsFromGroup;
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't get products", e);
+        }
+    }
+
     private static Group resultSetToGroup(ResultSet resultSet) throws SQLException {
         return new Group(
                 resultSet.getInt("groupId"),
@@ -494,12 +472,37 @@ public class Database {
         }
     }
 
-    public static void close() throws ClassNotFoundException, SQLException {
-        con.close();
+    public void dropProductsTable() {
+        try {
+            final Statement statement = con.createStatement();
+            String query = "drop table if exists " + productsTable;
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't drop products table", e);
+        }
+    }
+
+    public void dropGroupsTable() {
+        try {
+            final Statement statement = con.createStatement();
+            String query = "drop table if exists " + groupsTable;
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't drop groups table", e);
+        }
+    }
+
+    public void close() {
+        try {
+            con.close();
+            System.out.println("Connection closed");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public static void main(String[] args) {
-        /*Database database = new Database();
+        Database database = new Database();
 
         Group group1 = new Group(1, "fruits", "smth1group");
         Group group2 = new Group(2, "vegetables", "smth2group");
@@ -546,7 +549,6 @@ public class Database {
 
         database.deleteGroup(group1.getId());
         System.out.println(database.readProducts());
-        database.deleteGroups();*/
     }
 
 }
