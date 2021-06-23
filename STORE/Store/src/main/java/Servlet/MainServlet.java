@@ -90,8 +90,8 @@ public class MainServlet extends HttpServlet {
                     String description = jsonObject.getString("description");
 
                     Group group = new Group(name, description);
-                    System.out.println(group);
                     database.createGroup(group);
+                    System.out.println(group);
                     JSONObject jsonToReturn1 = new JSONObject();
                     jsonToReturn1.put("answer", "ok");
                     out.println(jsonToReturn1.toString());
