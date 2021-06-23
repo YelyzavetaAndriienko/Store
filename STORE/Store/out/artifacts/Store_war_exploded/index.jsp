@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+    <script src="javascript/script.js"></script>
     <style>
         *{
             padding:0;
@@ -366,7 +366,7 @@
 
 <div id="bottom">
     <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button">Ok</a>
+        <a href="" class="floating-button" onclick="addGroup()">Ok</a>
     </div>
 </div>
 

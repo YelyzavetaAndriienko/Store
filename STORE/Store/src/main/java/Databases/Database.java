@@ -1,9 +1,7 @@
 package Databases;
 
-import Models.Group;
-import Models.GroupFilter;
-import Models.Product;
-import Models.ProductFilter;
+import Models.*;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -76,6 +74,23 @@ public class Database {
         }
     }
 
+    public static User createUser(User user) {
+        try (PreparedStatement statement = con.prepareStatement("INSERT INTO users(login, password) VALUES (?, ?)")) {
+            statement.setString(1, user.getLogin());
+            statement.setString(2, DigestUtils.md5Hex(user.getPassword()));
+
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            user.setId(resultSet.getInt("last_insert_rowid()"));
+
+            return user;
+        } catch (SQLException e) {
+            System.out.println("Can't insert user");
+            e.printStackTrace();
+            throw new RuntimeException("Can't insert user", e);
+        }
+    }
+
     public static Group createGroup(Group group) {
         if (group.getName().equals(""))
             throw new NullPointerException("Enter correct name of the group");
@@ -125,6 +140,19 @@ public class Database {
         } else {
             System.out.println("Name is not unique for product!");
             return null;
+        }
+    }
+
+    public static User readUserByLogin(String login) {
+        try (Statement st = con.createStatement();
+             ResultSet resultSet = st.executeQuery("SELECT * FROM users where login = '" + login + "'");) {
+            if (resultSet.next()) {
+                return new User(resultSet.getInt("userId"), resultSet.getString("login"), resultSet.getString("password"));
+            }
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Invalid SQL request");
+            throw new RuntimeException("Can't select user", e);
         }
     }
 
@@ -466,8 +494,12 @@ public class Database {
         }
     }
 
+    public static void close() throws ClassNotFoundException, SQLException {
+        con.close();
+    }
+
     public static void main(String[] args) {
-        Database database = new Database();
+        /*Database database = new Database();
 
         Group group1 = new Group(1, "fruits", "smth1group");
         Group group2 = new Group(2, "vegetables", "smth2group");
@@ -514,6 +546,7 @@ public class Database {
 
         database.deleteGroup(group1.getId());
         System.out.println(database.readProducts());
+        database.deleteGroups();*/
     }
 
 }
