@@ -25,8 +25,8 @@ public class DeleteGroupServlet extends HttpServlet {
         System.out.println("There is doGet");
 
         response.setContentType("text/html");
-       // List<Group> groups = Database.readGroups();
-       // request.setAttribute("groups", groups);
+        // List<Group> groups = Database.readGroups();
+        // request.setAttribute("groups", groups);
         RequestDispatcher dispatcher = request.getRequestDispatcher("deleteGroup.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
@@ -38,8 +38,47 @@ public class DeleteGroupServlet extends HttpServlet {
         super.doPost(request, response);
     }*/
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("There is doPost for delete");
+        StringBuilder jb = new StringBuilder();
+        String line = null;
 
+        try {
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null)
+                jb.append(line);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        Database database = new Database();
+
+        try {
+            JSONObject jsonObject = new JSONObject(jb.toString());
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            String name = jsonObject.getString("name");
+            Group g = null;
+            List<Group> groupsList = database.readGroups();
+            for (int i = 0; i < groupsList.size(); i++) {
+                if (name.equals(groupsList.get(i).getName())) {
+                    g = groupsList.get(i);
+                }
+            }
+
+            System.out.println(g);
+            database.deleteGroup(g.getId());
+            JSONObject jsonToReturn1 = new JSONObject();
+            jsonToReturn1.put("answer", "ok");
+            out.println(jsonToReturn1.toString());
+            System.out.println(jsonToReturn1.toString());
+
+            System.out.println(database.readGroups());
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        database.close();
     }
 
 }
