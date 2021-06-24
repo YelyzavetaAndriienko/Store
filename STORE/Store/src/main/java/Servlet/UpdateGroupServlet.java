@@ -39,6 +39,7 @@ public class UpdateGroupServlet extends HttpServlet {
     }*/
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("There is doGet");
         StringBuilder jb = new StringBuilder();
         String line = null;
 
@@ -52,16 +53,12 @@ public class UpdateGroupServlet extends HttpServlet {
 
         Database database = new Database();
 
+        System.out.println("hello");
         try {
             JSONObject jsonObject = new JSONObject(jb.toString());
+            Group group = (Group) jsonObject.get("group");
 
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-
-                    String name = jsonObject.getString("name");
-                    String description = jsonObject.getString("description");
-
-                    Group group = new Group(name, description);
+            System.out.println("-------------------------------" + group.toString());
 
         } catch (Exception e) {
             System.out.println(e.toString());

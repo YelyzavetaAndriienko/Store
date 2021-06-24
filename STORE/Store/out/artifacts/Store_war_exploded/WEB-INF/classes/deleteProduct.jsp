@@ -253,26 +253,24 @@
                 <li><a href="" class="submenu-link">Groups</a>
                     <ul class="submenu">
                         <li><a href="http://localhost:8080/Store">Create</a></li>
-                        <li><a href="http://localhost:8080/Store">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/update">Update</a></li>
                         <li><a href="http://localhost:8080/Store/delete">Delete</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
                     <ul class="submenu">
                         <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
-                        <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/updateProduct">Update</a></li>
                         <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
                         <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>
                         <li><a href="http://localhost:8080/Store/writeOffFromProduct">Write off</a></li>
-                        <li><a href="">Search</a></li>
+                        <li><a href="http://localhost:8080/Store/search">Search</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Statistics</a>
                     <ul class="submenu">
-                        <li><a href="">All products</a></li>
-                        <li><a href="">All products in group</a></li>
-                        <li><a href="">Total cost</a></li>
-                        <li><a href="">Total cost in group</a></li>
+                        <li><a href="http://localhost:8080/Store/allProducts">All products</a></li>
+                        <li><a href="http://localhost:8080/Store/allProductsInGroup">All products in group</a></li>
                     </ul>
                 </li>
             </ul>

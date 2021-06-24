@@ -56,17 +56,17 @@ function addGroup()
     serverConnectFunc(serverUrl, JSON.stringify(jsonData));
 }
 
-function changeFunc() {
-    let selectBox = document.getElementById("selectBox");
-    let selectedValue = selectBox.options[selectBox.selectedIndex].value;
+function goToDeleteGroup() {
 
-    let jsonData = new Object();
-    jsonData.product = selectedValue;
+}
+
+function changeFunc() {
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+    var jsonData = new Object();
+    jsonData.group = selectedValue;
 
     let serverUrl = window.location.href;
     serverConnectFunc(serverUrl, JSON.stringify(jsonData));
-}
-
-function goToDeleteGroup() {
-
 }

@@ -59,3 +59,14 @@ function addGroup()
 function goToDeleteGroup() {
 
 }
+
+function changeFunc() {
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+    var jsonData = new Object();
+    jsonData.group = selectedValue;
+
+    let serverUrl = window.location.href;
+    serverConnectFunc(serverUrl, JSON.stringify(jsonData));
+}

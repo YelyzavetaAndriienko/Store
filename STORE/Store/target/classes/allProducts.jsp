@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -179,7 +180,129 @@
             height: 64.82982vh;
             width: 82.1vw;
             margin: 0 auto;
-            margin-top: 16.855vh;
+            margin-top: 6.483vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #404040;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #top {
+            -moz-column-count: 2; /* Для Firefox */
+            -webkit-column-count: 2; /* Для Safari и Chrome */
+            column-count: 2;
+            /*border: 1px solid red;*/
+            width: 82.1vw;
+            margin-bottom: 3.241491vh;
+        }
+
+        .groupSelection {
+            float: left;
+            width: 40.23vw;
+            /*border: 1px solid yellow;*/
+            text-align: left;
+        }
+
+        .selection {
+            border-radius: 5px;
+            border: 2px solid transparent;
+            background-color: transparent;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #9d959d;
+            padding: 22px;
+        }
+
+        .selection:focus {
+            outline: none;
+        }
+
+        .totalCost {
+            height: 6.483vh;
+            float: left;
+            width: 40.23vw;
+            /*border: 1px solid green;*/
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            -moz-column-count: 2; /* Для Firefox */
+            -webkit-column-count: 2; /* Для Safari и Chrome */
+            column-count: 2;
+        }
+
+        .costText {
+            height: 3.241491vh;
+            width: 28.735632vw;
+            float: left;
+            text-align: right;
+            margin-top: 10px;
+            /*border: 1px solid blue;*/
+        }
+
+        .costNumber {
+            height: 3.241491vh;
+            width: 11vw;
+            float: right;
+            text-align: right;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 2px solid #404040;
+            /*border: 1px solid pink;*/
+        }
+
+
+        .form-row {
+            position: relative;
+            margin-bottom: 3.24vh;
+        }
+
+        .form-row input {
+            display: block;
+            width: 97%;
+            padding: 0 10px;
+            line-height: 6.48vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            background: none;
+            border-width: 0;
+            border-bottom: 2px solid #404040;
+            transition: all 0.2s ease;
+        }
+
+        .form-row label {
+            position: absolute;
+            left: 13px;
+            color: #9d959d;
+            font-size: 20px;
+            font-weight: 300;
+            transform: translateY(-35px);
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .form-row input:focus {
+            outline: 0;
+            border-color: #F77A52;
+        }
+
+        .form-row input:focus + label, .form-row input:valid + label {
+            transform: translateY(-60px);
+            margin-left: -14px;
+            font-size: 14px;
+            font-weight: 400;
+            outline: 0;
+            border-color: #F77A52;
+            color: #F77A52;
         }
 
         .allProducts {
@@ -196,7 +319,40 @@
             color: #404040;
         }
 
+        #bottom {
+            height: 8.1vh;
+        }
 
+        .buttonOk {
+            text-align: center;
+        }
+
+        .floating-button {
+            text-decoration: none;
+            display: inline-block;
+            width: 11.5vw;
+            height: 7.3vh;
+            line-height: 7.3vh;
+            border-radius: 45px;
+            margin: 10px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px;
+            font-weight: 600;
+            color: #524f4e;
+            background: white;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+            transition: .3s;
+        }
+
+        .floating-button:hover {
+            background: #D5B45B;
+            box-shadow: 0 15px 20px rgba(213, 180, 91, .4);
+            color: white;
+            transform: translateY(-7px);
+        }
     </style>
 </head>
 
@@ -213,18 +369,18 @@
                 <li><a href="" class="submenu-link">Groups</a>
                     <ul class="submenu">
                         <li><a href="http://localhost:8080/Store">Create</a></li>
-                        <li><a href="http://localhost:8080/Store">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/update">Update</a></li>
                         <li><a href="http://localhost:8080/Store/delete">Delete</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
                     <ul class="submenu">
                         <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
-                        <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/updateProduct">Update</a></li>
                         <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
                         <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>
                         <li><a href="http://localhost:8080/Store/writeOffFromProduct">Write off</a></li>
-                        <li><a href="">Search</a></li>
+                        <li><a href="http://localhost:8080/Store/search">Search</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Statistics</a>
@@ -240,10 +396,25 @@
 </div>
 
 <div id="mainDiv">
+    <div id="top">
+        <div class="groupSelection">
+            <div class="selection">
+            </div>
+        </div>
+
+        <div class="totalCost">
+            <div class="costText">Total cost:&nbsp; &nbsp; &nbsp;</div>
+            <div class="costNumber"></div>
+        </div>
+    </div>
+
     <div class="allProducts">
     </div>
 </div>
 
-</body>
+<div id="bottom">
 
+</div>
+
+</body>
 </html>
