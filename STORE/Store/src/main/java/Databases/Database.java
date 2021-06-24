@@ -10,7 +10,7 @@ import java.util.List;
 public class Database {
 
     private static Connection con;
-    public static final String databaseFile = "C://temp//db//storedata.db";
+    public static final String databaseFile = "C:\\temp\\db\\storedata.db";
     public static final String groupsTable = "groups";
     public static final String productsTable = "products";
 

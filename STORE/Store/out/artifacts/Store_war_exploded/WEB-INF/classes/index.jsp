@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Liza
@@ -343,7 +343,7 @@
                     <ul class="submenu">
                         <li><a href="">Create</a></li>
                         <li><a href="">Update</a></li>
-                        <li><a href="">Delete</a></li>
+                        <li><a href="" onclick="goToDeleteGroup()">Delete</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
