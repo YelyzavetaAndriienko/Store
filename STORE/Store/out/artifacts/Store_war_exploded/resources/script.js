@@ -114,6 +114,117 @@ function createProduct() {
     });
 }
 
+function deleteProduct() {
+    let jsonData = new Object();
+    jsonData.name = $('#name').val();
+    let jsonStr = JSON.stringify(jsonData);
+
+    $.ajax({
+        url: "http://localhost:8080/Store/deleteProduct",
+        type: 'DELETE',
+        data: jsonStr,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
+}
+
+function addToProduct() {
+    let jsonDataP = new Object();
+    jsonDataP.name = $('#name').val();
+    jsonDataP.amountToAdd = $('#amountToAdd').val();
+
+    let jsonStrP = JSON.stringify(jsonDataP);
+
+    $.ajax({
+        url: "http://localhost:8080/Store/addToProduct",
+        type: 'POST',
+        data: jsonStrP,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
+}
+
+function writeOffFromProduct() {
+    let jsonDataP = new Object();
+    jsonDataP.name = $('#name').val();
+    jsonDataP.amountToWriteOff = $('#amountToWriteOff').val();
+
+    let jsonStrP = JSON.stringify(jsonDataP);
+
+    $.ajax({
+        url: "http://localhost:8080/Store/writeOffFromProduct",
+        type: 'POST',
+        data: jsonStrP,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
+}
+
+
+
+function showProductOfThisGroup(){
+    let jsonDataP = new Object();
+    jsonDataP.name = $('#name').val();
+    let jsonStrP = JSON.stringify(jsonDataP);
+    $.ajax({
+        url: "http://localhost:8080/Store/allProductsInGroup",
+        type: 'POST',
+        data: jsonStrP,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
+}
+
+
+
 function changeFunc() {
     var selectBox = document.getElementById("selectBox");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;

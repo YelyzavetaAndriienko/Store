@@ -34,12 +34,49 @@ public class DeleteProductServlet extends HttpServlet {
     }
 
     @Override
-    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
-    }*/
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("There is doPost for deleteProduct");
+        StringBuilder jb = new StringBuilder();
+        String line = null;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            BufferedReader reader = request.getReader();
+            while ((line = reader.readLine()) != null)
+                jb.append(line);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
 
+        Database database = new Database();
+
+        try {
+            JSONObject jsonObject = new JSONObject(jb.toString());
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            String name = jsonObject.getString("name");
+            Product g = null;
+            List<Product> productsList = database.readProducts();
+            for (int i = 0; i < productsList.size(); i++) {
+                if (name.equals(productsList.get(i).getName())) {
+                    g = productsList.get(i);
+                }
+            }
+            if(g!=null){
+            System.out.println(g);
+            database.deleteProduct(g.getId());
+            JSONObject jsonToReturn1 = new JSONObject();
+            jsonToReturn1.put("answer", "ok");
+            out.println(jsonToReturn1.toString());
+            System.out.println(jsonToReturn1.toString());
+
+            System.out.println(database.readProducts());
+            } else {
+                System.out.println("There is no product with such name");
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        database.close();
     }
 
 }
