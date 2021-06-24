@@ -56,24 +56,6 @@ function addGroup()
     serverConnectFunc(serverUrl, JSON.stringify(jsonData));
 }
 
-function goToDeleteGroup()
-{
-    let serverUrl = window.location.href;
-    $.ajax({
-        url: serverUrl + "/delete/",
-        type: 'POST',
-        async: true,
+function goToDeleteGroup() {
 
-        success: function (event) {
-            switch (event["answer"])
-            {
-                case "ok":
-                    alert("success");
-                    break;
-            }
-        },
-        error: function (xhr, status, error) {
-            alert(error);
-        }
-    });
 }

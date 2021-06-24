@@ -14,8 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 
-@WebServlet("/")
-public class MainServlet extends HttpServlet {
+@WebServlet("/createProduct")
+public class СreateProductServlet extends HttpServlet {
     //private Database database;
     //private static Database database = new Database();
 
@@ -25,7 +25,7 @@ public class MainServlet extends HttpServlet {
         System.out.println("There is doGet");
 
         response.setContentType("text/html");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("createProduct.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
         }
@@ -73,7 +73,7 @@ public class MainServlet extends HttpServlet {
                     break;
 
                 case 1: //create group
-/*
+
                     int gId = jsonObject.getInt("groupId");
                     String name = jsonObject.getString("name");
                     String description = jsonObject.getString("description");
@@ -84,14 +84,8 @@ public class MainServlet extends HttpServlet {
                     Product product = new Product(gId, name, description, manufacturer, amount, price);
 
                     Database.createProduct(product);
-*/
 
-                    String name = jsonObject.getString("name");
-                    String description = jsonObject.getString("description");
-
-                    Group group = new Group(name, description);
-                    database.createGroup(group);
-                    System.out.println(group);
+                    System.out.println(product);
                     JSONObject jsonToReturn1 = new JSONObject();
                     jsonToReturn1.put("answer", "ok");
                     out.println(jsonToReturn1.toString());
@@ -99,7 +93,7 @@ public class MainServlet extends HttpServlet {
 
                     System.out.println(database.readGroups());
 
-                    String text = jsonToReturn1.toString() + "\n  ------- \n" + group.toString();
+                    String text = jsonToReturn1.toString() + "\n  ------- \n" + product.toString();
 
                     try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Liza\\Documents\\notes.txt")) {
                         // перевод строки в байты

@@ -14,8 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 
-@WebServlet("/delete")
-public class DeleteGroupServlet extends HttpServlet {
+@WebServlet("/deleteProduct")
+public class DeleteProductServlet extends HttpServlet {
     //private Database database;
     //private static Database database = new Database();
 
@@ -25,9 +25,9 @@ public class DeleteGroupServlet extends HttpServlet {
         System.out.println("There is doGet");
 
         response.setContentType("text/html");
-       // List<Group> groups = Database.readGroups();
-       // request.setAttribute("groups", groups);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("deleteGroup.jsp");
+       // List<Product> products = Database.readProducts();
+       // request.setAttribute("products", products);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("deleteProduct.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
         }

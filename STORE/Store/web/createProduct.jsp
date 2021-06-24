@@ -1,13 +1,13 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: Liza
-  Date: 22.06.2021
-  Time: 13:13
+  Date: 24.06.2021
+  Time: 08:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Store</title>
@@ -15,22 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="resources/script.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-          rel="stylesheet" type="text/css">
-    <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-          rel="stylesheet" type="text/css">
 
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <style>
         *{
             padding:0;
@@ -182,6 +167,22 @@
             margin-top: 6.483vh;
         }
 
+        .groupSelection {
+            margin-bottom: 3.24vh;
+        }
+        .selection {
+            border-radius: 45px;
+            border: 2px solid #404040;
+            background-color:transparent;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #9d959d;
+        }
+        .selection:focus{
+            outline:none;
+        }
+
         .ui-form {
             max-width: 350px;
             padding: 80px 30px 30px;
@@ -331,26 +332,27 @@
 
 <body>
 <div id="titleDiv">
-    <div id="div1"><img id="titleImage" src="resources/logo.png" align="center"/></div>
+    <div id="div1"><img id="titleImage" src="C:\НАУКМА\2курс3семестр\Розробка клієнт-серверних застосувань\STORE\Images/logo.png" align="center"/></div>
     <div id="div2">STORE</div>
     <div id="div3"></div>
 </div>
+
 <div id="menuDiv">
     <header>
         <nav>
             <ul class="topmenu">
                 <li><a href="" class="submenu-link">Groups</a>
                     <ul class="submenu">
-                        <li><a href="http://localhost:8080/Store">Create</a></li>
-                        <li><a href="http://localhost:8080/Store">Update</a></li>
-                        <li><a href="http://localhost:8080/Store/delete">Delete</a></li>
+                        <li><a href="">Create</a></li>
+                        <li><a href="">Update</a></li>
+                        <li><a href="">Delete</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
                     <ul class="submenu">
-                        <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
-                        <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
-                        <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
+                        <li><a href="">Create</a></li>
+                        <li><a href="">Update</a></li>
+                        <li><a href="">Delete</a></li>
                         <li><a href="">Add</a></li>
                         <li><a href="">Write off</a></li>
                         <li><a href="">Search</a></li>
@@ -369,20 +371,37 @@
     </header>
 
 </div>
+
 <div id="mainDiv">
+    <div class="groupSelection">
+        <select class="selection">
+            <option disabled selected>Choose the group</option>
+            <option value="group1">Group 1</option>
+        </select>
+    </div>
     <div class="form-row">
         <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
     </div>
     <div class="form-row">
         <input type="text" id="description" required autocomplete="off"><label for="description">Description</label>
     </div>
+    <div class="form-row">
+        <input type="text" id="manufacturer" required autocomplete="off"><label for="manufacturer">Manufacturer</label>
+    </div>
+    <div class="form-row">
+        <input type="number" id="amount" required autocomplete="off"><label for="amount">Amount</label>
+    </div>
+    <div class="form-row">
+        <input type="number" id="price" required autocomplete="off"><label for="price">Price</label>
+    </div>
 </div>
 
 <div id="bottom">
     <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button" onclick="addGroup()">Ok</a>
+        <a href="" class="floating-button">Ok</a>
     </div>
 </div>
 
 </body>
+
 </html>
