@@ -14,8 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 
-@WebServlet("/")
-public class MainServlet extends HttpServlet {
+@WebServlet("/update")
+public class UpdateGroupServlet extends HttpServlet {
     //private Database database;
     //private static Database database = new Database();
 
@@ -25,7 +25,9 @@ public class MainServlet extends HttpServlet {
         System.out.println("There is doGet");
 
         response.setContentType("text/html");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        // List<Group> groups = Database.readGroups();
+        // request.setAttribute("groups", groups);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("updateGroup.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
         }
@@ -37,7 +39,6 @@ public class MainServlet extends HttpServlet {
     }*/
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("There is doPost");
         StringBuilder jb = new StringBuilder();
         String line = null;
 
@@ -50,63 +51,22 @@ public class MainServlet extends HttpServlet {
         }
 
         Database database = new Database();
-       // database.deleteGroups();
+
         try {
             JSONObject jsonObject = new JSONObject(jb.toString());
 
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
 
-            int command = jsonObject.getInt("command");
-
-            switch (command) {
-
-                case 0: //get all groups
-
-                    List<Product> names = Database.readProducts();
-
-                    JSONObject jsonToReturn0 = new JSONObject();
-                    jsonToReturn0.put("answer", "names");
-                    jsonToReturn0.put("list", names.toString());
-                    out.println(jsonToReturn0.toString());
-
-                    break;
-
-                case 1: //create group
-
                     String name = jsonObject.getString("name");
                     String description = jsonObject.getString("description");
 
                     Group group = new Group(name, description);
-                    database.createGroup(group);
-                    System.out.println(group);
-                    JSONObject jsonToReturn1 = new JSONObject();
-                    jsonToReturn1.put("answer", "ok");
-                    out.println(jsonToReturn1.toString());
-                    System.out.println(jsonToReturn1.toString());
 
-                    System.out.println(database.readGroups());
-
-                    String text = jsonToReturn1.toString() + "\n  ------- \n" + group.toString();
-
-                    try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Liza\\Documents\\notes.txt")) {
-                        // перевод строки в байты
-                        byte[] buffer = text.getBytes();
-
-                        fos.write(buffer, 0, buffer.length);
-                    } catch (IOException ex) {
-
-                        System.out.println(ex.getMessage());
-                    }
-
-                default:
-                    System.out.println("default switch");
-                    break;
-
-            }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
         database.close();
     }
+
 }

@@ -369,7 +369,7 @@
                 <li><a href="" class="submenu-link">Groups</a>
                     <ul class="submenu">
                         <li><a href="http://localhost:8080/Store">Create</a></li>
-                        <li><a href="http://localhost:8080/Store">Update</a></li>
+                        <li><a href="http://localhost:8080/update">Update</a></li>
                         <li><a href="http://localhost:8080/Store/delete">Delete</a></li>
                     </ul>
                 </li>

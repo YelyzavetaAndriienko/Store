@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Liza
   Date: 24.06.2021
-  Time: 08:04
+  Time: 14:22
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -16,6 +16,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="resources/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+          rel="stylesheet" type="text/css">
+    <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+          rel="stylesheet" type="text/css">
+
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <style>
         * {
@@ -306,23 +322,6 @@
             padding-top: 1.62vh;
         }
 
-        /*
-        .superbutton {
-        width:150px;
-        height:40px;
-        border-radius:20px;
-        background:#459DE5;
-        color:#fff;
-        font-size:18px;
-        cursor:pointer;
-        }
-        .superbutton:hover{
-        background:#358DE5;
-        }
-        .superbutton:focus{
-        outline:none;
-        }
-        */
         #bottom {
             height: 8.1vh;
         }
@@ -358,6 +357,7 @@
             transform: translateY(-7px);
         }
     </style>
+
 </head>
 
 <body>
@@ -374,7 +374,7 @@
                 <li><a href="" class="submenu-link">Groups</a>
                     <ul class="submenu">
                         <li><a href="http://localhost:8080/Store">Create</a></li>
-                        <li><a href="http://localhost:8080/Store">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/update">Update</a></li>
                         <li><a href="http://localhost:8080/Store/delete">Delete</a></li>
                     </ul>
                 </li>
@@ -403,10 +403,11 @@
 </div>
 
 <div id="mainDiv">
+
     <div class="groupSelection">
         <select class="selection">
             <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
+            <option value="group1"><input type="text">Group 1</option>
         </select>
     </div>
     <div class="form-row">
@@ -415,15 +416,7 @@
     <div class="form-row">
         <input type="text" id="description" required autocomplete="off"><label for="description">Description</label>
     </div>
-    <div class="form-row">
-        <input type="text" id="manufacturer" required autocomplete="off"><label for="manufacturer">Manufacturer</label>
-    </div>
-    <div class="form-row">
-        <input type="number" id="amount" required autocomplete="off"><label for="amount">Amount</label>
-    </div>
-    <div class="form-row">
-        <input type="number" id="price" required autocomplete="off"><label for="price">Price</label>
-    </div>
+
 </div>
 
 <div id="bottom">
