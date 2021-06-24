@@ -358,10 +358,8 @@
                 </li>
                 <li><a href="" class="submenu-link">Statistics</a>
                     <ul class="submenu">
-                        <li><a href="">All products</a></li>
-                        <li><a href="">All products in group</a></li>
-                        <li><a href="">Total cost</a></li>
-                        <li><a href="">Total cost in group</a></li>
+                        <li><a href="http://localhost:8080/Store/allProducts">All products</a></li>
+                        <li><a href="http://localhost:8080/Store/allProductsInGroup">All products in group</a></li>
                     </ul>
                 </li>
             </ul>

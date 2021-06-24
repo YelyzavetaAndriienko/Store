@@ -13,16 +13,17 @@
     <title>Store</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <style>
-        *{
-            padding:0;
-            margin:0;
+        * {
+            padding: 0;
+            margin: 0;
         }
 
-        body{
+        body {
             align-items: center;
             justify-content: center;
             background-color: #BFD7EA;
@@ -71,28 +72,32 @@
         }
 
 
-
-
         header {
             background: white;
             text-align: center;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
         }
+
         header a {
             display: block;
             text-decoration: none;
             outline: none;
             transition: .3s ease-in-out;
         }
+
         nav {
             display: table;
             margin: 0 auto;
         }
+
         nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
-        nav li a{
+
+        nav li a {
             margin-left: 1.642vw;
             margin-right: 0.821vw;
         }
@@ -104,11 +109,13 @@
             text-align: center;
             padding-left: 6.568vw;
         }
+
         .topmenu:after {
             content: "";
             display: table;
             clear: both;
         }
+
         .topmenu > li {
             width: 25%;
             float: left;
@@ -117,6 +124,7 @@
             font-size: 20px;
             font-weight: 400;
         }
+
         .topmenu > li > a {
             text-transform: uppercase;
             font-size: 14px;
@@ -124,13 +132,18 @@
             color: #404040;
             padding: 15px 30px;
         }
-        .topmenu li a:hover {color: #D5B45B;}
+
+        .topmenu li a:hover {
+            color: #D5B45B;
+        }
+
         .submenu-link:after {
             content: "\f107";
             font-family: "FontAwesome";
             color: inherit;
             margin-left: 10px;
         }
+
         .submenu {
             background: #273037;
             position: absolute;
@@ -140,24 +153,26 @@
             width: 14.778325vw;
             opacity: 0;
             transform: scaleY(0);
-            transform-origin :0 0;
+            transform-origin: 0 0;
             transition: .5s ease-in-out;
         }
+
         .submenu a {
             color: white;
             text-align: left;
             padding: 12px 15px;
             font-size: 13px;
-            border-bottom: 1px solid rgba(255,255,255,.1);
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
         }
+
         .submenu li:last-child a {
             border-bottom: none;
         }
+
         .topmenu > li:hover .submenu {
             opacity: 1;
             transform: scaleY(1);
         }
-
 
 
         #mainDiv {
@@ -172,13 +187,13 @@
             height: 48.62vh;
             padding-top: 1.62vh;
             padding-bottom: 1.62vh;
-            border-radius: 45px;
+            border-radius: 5px;
             border: 2px solid #404040;
-            background-color: transparent;
+            background-color: white;
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
             font-size: 15px;
-            color: #9d959d;
+            color: #404040;
         }
 
 

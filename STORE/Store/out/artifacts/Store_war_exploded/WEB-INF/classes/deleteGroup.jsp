@@ -191,7 +191,7 @@
             margin-bottom: 3.24vh;
         }
         .selection {
-            border-radius: 45px;
+            border-radius: 5px;
             border: 2px solid #404040;
             background-color:transparent;
             font-family: 'Montserrat', sans-serif;

@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Liza
   Date: 24.06.2021
-  Time: 08:04
+  Time: 10:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,17 +13,16 @@
     <title>Store</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <style>
-        * {
-            padding: 0;
-            margin: 0;
+        *{
+            padding:0;
+            margin:0;
         }
 
-        body {
+        body{
             align-items: center;
             justify-content: center;
             background-color: #BFD7EA;
@@ -72,32 +71,28 @@
         }
 
 
+
+
         header {
             background: white;
             text-align: center;
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
         }
-
         header a {
             display: block;
             text-decoration: none;
             outline: none;
             transition: .3s ease-in-out;
         }
-
         nav {
             display: table;
             margin: 0 auto;
         }
-
         nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
-
-        nav li a {
+        nav li a{
             margin-left: 1.642vw;
             margin-right: 0.821vw;
         }
@@ -109,13 +104,11 @@
             text-align: center;
             padding-left: 6.568vw;
         }
-
         .topmenu:after {
             content: "";
             display: table;
             clear: both;
         }
-
         .topmenu > li {
             width: 25%;
             float: left;
@@ -124,7 +117,6 @@
             font-size: 20px;
             font-weight: 400;
         }
-
         .topmenu > li > a {
             text-transform: uppercase;
             font-size: 14px;
@@ -132,18 +124,13 @@
             color: #404040;
             padding: 15px 30px;
         }
-
-        .topmenu li a:hover {
-            color: #D5B45B;
-        }
-
+        .topmenu li a:hover {color: #D5B45B;}
         .submenu-link:after {
             content: "\f107";
             font-family: "FontAwesome";
             color: inherit;
             margin-left: 10px;
         }
-
         .submenu {
             background: #273037;
             position: absolute;
@@ -153,26 +140,24 @@
             width: 14.778325vw;
             opacity: 0;
             transform: scaleY(0);
-            transform-origin: 0 0;
+            transform-origin :0 0;
             transition: .5s ease-in-out;
         }
-
         .submenu a {
             color: white;
             text-align: left;
             padding: 12px 15px;
             font-size: 13px;
-            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            border-bottom: 1px solid rgba(255,255,255,.1);
         }
-
         .submenu li:last-child a {
             border-bottom: none;
         }
-
         .topmenu > li:hover .submenu {
             opacity: 1;
             transform: scaleY(1);
         }
+
 
 
         #mainDiv {
@@ -180,12 +165,30 @@
             width: 82.1vw;
             margin: 0 auto;
             margin-top: 6.483vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #404040;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #top {
+            -moz-column-count: 2; /* Для Firefox */
+            -webkit-column-count: 2; /* Для Safari и Chrome */
+            column-count: 2;
+            /*border: 1px solid red;*/
+            width: 82.1vw;
+            margin-bottom: 3.241491vh;
         }
 
         .groupSelection {
-            margin-bottom: 3.24vh;
+            float: left;
+            width: 40.23vw;
+            /*border: 1px solid yellow;*/
+            text-align: left;
         }
-
         .selection {
             border-radius: 5px;
             border: 2px solid #404040;
@@ -194,59 +197,51 @@
             font-weight: 400;
             font-size: 15px;
             color: #9d959d;
+            padding: 10px;
+        }
+        .selection:focus{
+            outline:none;
         }
 
-        .selection:focus {
-            outline: none;
-        }
-
-        .ui-form {
-            max-width: 350px;
-            padding: 80px 30px 30px;
-            margin: 50px auto 30px;
-            background: white;
-        }
-
-        .ui-form h3 {
-            position: relative;
-            z-index: 5;
-            margin: 0 0 60px;
+        .totalCost {
+            height: 6.483vh;
+            float: left;
+            width: 40.23vw;
+            /*border: 1px solid green;*/
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            color: #4a90e2;
-            font-size: 30px;
-            font-weight: normal;
+            -moz-column-count: 2; /* Для Firefox */
+            -webkit-column-count: 2; /* Для Safari и Chrome */
+            column-count: 2;
+        }
+        .costText {
+            height: 3.241491vh;
+            width: 28.735632vw;
+            float: left;
+            text-align: right;
+            margin-top: 10px;
+            /*border: 1px solid blue;*/
+        }
+        .costNumber {
+            height: 3.241491vh;
+            width: 11vw;
+            float: right;
+            text-align: right;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 2px solid #404040;
+            /*border: 1px solid pink;*/
         }
 
-        .ui-form h3:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            left: 4.9261vw;
-            top: -4.862vh;
-            width: 8.21vw;
-            height: 16.2vw;
-            border-radius: 50%;
-            background: #fee8e4;
-        }
-
-        .ui-form h3:after {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            right: 4.1vw;
-            top: -6.48vh;
-            width: 0;
-            height: 0;
-            border-left: 4.5vw solid transparent;
-            border-right: 4.5vw solid transparent;
-            border-bottom: 8.9vh solid #ffe3b5;
-        }
 
         .form-row {
             position: relative;
             margin-bottom: 3.24vh;
         }
-
         .form-row input {
             display: block;
             width: 97%;
@@ -260,7 +255,6 @@
             border-bottom: 2px solid #404040;
             transition: all 0.2s ease;
         }
-
         .form-row label {
             position: absolute;
             left: 13px;
@@ -273,13 +267,11 @@
             font-weight: 400;
             font-size: 15px;
         }
-
         .form-row input:focus {
             outline: 0;
             border-color: #F77A52;
         }
-
-        .form-row input:focus + label, .form-row input:valid + label {
+        .form-row input:focus+label, .form-row input:valid+label {
             transform: translateY(-60px);
             margin-left: -14px;
             font-size: 14px;
@@ -289,48 +281,26 @@
             color: #F77A52;
         }
 
-        .ui-form input[type="submit"] {
-            width: 100%;
-            padding: 0;
-            line-height: 42px;
-            background: #4a90e2;
-            border-width: 0;
-            color: white;
+        .allProducts {
+            width: 81.773399vw;
+            height: 48.62vh;
+            padding-top: 1.62vh;
+            padding-bottom: 1.62vh;
+            border-radius: 5px;
+            border: 2px solid #404040;
+            background-color: white;
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
-            font-size: 20px;
+            font-size: 15px;
+            color: #404040;
         }
 
-        .ui-form p {
-            margin: 0;
-            padding-top: 1.62vh;
-        }
-
-        /*
-        .superbutton {
-        width:150px;
-        height:40px;
-        border-radius:20px;
-        background:#459DE5;
-        color:#fff;
-        font-size:18px;
-        cursor:pointer;
-        }
-        .superbutton:hover{
-        background:#358DE5;
-        }
-        .superbutton:focus{
-        outline:none;
-        }
-        */
         #bottom {
             height: 8.1vh;
         }
-
         .buttonOk {
             text-align: center;
         }
-
         .floating-button {
             text-decoration: none;
             display: inline-block;
@@ -350,7 +320,6 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
             transition: .3s;
         }
-
         .floating-button:hover {
             background: #D5B45B;
             box-shadow: 0 15px 20px rgba(213, 180, 91, .4);
@@ -366,7 +335,6 @@
     <div id="div2">STORE</div>
     <div id="div3"></div>
 </div>
-
 <div id="menuDiv">
     <header>
         <nav>
@@ -390,10 +358,8 @@
                 </li>
                 <li><a href="" class="submenu-link">Statistics</a>
                     <ul class="submenu">
-                        <li><a href="">All products</a></li>
-                        <li><a href="">All products in group</a></li>
-                        <li><a href="">Total cost</a></li>
-                        <li><a href="">Total cost in group</a></li>
+                        <li><a href="http://localhost:8080/Store/allProducts">All products</a></li>
+                        <li><a href="http://localhost:8080/Store/allProductsInGroup">All products in group</a></li>
                     </ul>
                 </li>
             </ul>
@@ -403,32 +369,27 @@
 </div>
 
 <div id="mainDiv">
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
-        </select>
+    <div id="top">
+        <div class="groupSelection">
+            <select class="selection">
+                <option disabled selected>Choose the group</option>
+                <option value="group1">Group 1</option>
+            </select>
+        </div>
+
+        <div class="totalCost">
+            <div class="costText">Total cost in group:&nbsp; &nbsp; &nbsp; </div>
+            <div class="costNumber"></div>
+        </div>
     </div>
-    <div class="form-row">
-        <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
-    </div>
-    <div class="form-row">
-        <input type="text" id="description" required autocomplete="off"><label for="description">Description</label>
-    </div>
-    <div class="form-row">
-        <input type="text" id="manufacturer" required autocomplete="off"><label for="manufacturer">Manufacturer</label>
-    </div>
-    <div class="form-row">
-        <input type="number" id="amount" required autocomplete="off"><label for="amount">Amount</label>
-    </div>
-    <div class="form-row">
-        <input type="number" id="price" required autocomplete="off"><label for="price">Price</label>
+
+    <div class="allProducts">
     </div>
 </div>
 
 <div id="bottom">
-    <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button">Ok</a>
+    <div class="buttonOk">
+        <a href="" class="floating-button">Show</a>
     </div>
 </div>
 

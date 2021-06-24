@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Liza
   Date: 24.06.2021
-  Time: 08:04
+  Time: 11:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -180,7 +180,59 @@
             width: 82.1vw;
             margin: 0 auto;
             margin-top: 6.483vh;
+            -moz-column-count: 2; /* Для Firefox */
+            -webkit-column-count: 2; /* Для Safari и Chrome */
+            column-count: 2;
         }
+
+        #filters {
+            float: left;
+            width: 30vw;
+            height: 60.6vh;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #404040;
+        }
+
+        #result {
+            float: right;
+            width: 49.261vw;
+            height: 64vh;
+        }
+
+        .amount, .price {
+            -moz-column-count: 3; /* Для Firefox */
+            -webkit-column-count: 3; /* Для Safari и Chrome */
+            column-count: 3;
+            width: 45vw;
+        }
+
+        .amountLabel, .priceLabel {
+            float: left;
+            margin-top: 3.241491vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            color: #404040;
+        }
+
+        .amountFrom, .amountTo, .priceFrom, .priceTo {
+            float: left;
+        }
+
+        .allProducts {
+            width: 47.619vw;
+            height: 60.6vh;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #404040;
+            background-color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #404040;
+        }
+
 
         .groupSelection {
             margin-bottom: 3.24vh;
@@ -194,53 +246,13 @@
             font-weight: 400;
             font-size: 15px;
             color: #9d959d;
+            padding: 10px;
         }
 
         .selection:focus {
             outline: none;
         }
 
-        .ui-form {
-            max-width: 350px;
-            padding: 80px 30px 30px;
-            margin: 50px auto 30px;
-            background: white;
-        }
-
-        .ui-form h3 {
-            position: relative;
-            z-index: 5;
-            margin: 0 0 60px;
-            text-align: center;
-            color: #4a90e2;
-            font-size: 30px;
-            font-weight: normal;
-        }
-
-        .ui-form h3:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            left: 4.9261vw;
-            top: -4.862vh;
-            width: 8.21vw;
-            height: 16.2vw;
-            border-radius: 50%;
-            background: #fee8e4;
-        }
-
-        .ui-form h3:after {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            right: 4.1vw;
-            top: -6.48vh;
-            width: 0;
-            height: 0;
-            border-left: 4.5vw solid transparent;
-            border-right: 4.5vw solid transparent;
-            border-bottom: 8.9vh solid #ffe3b5;
-        }
 
         .form-row {
             position: relative;
@@ -249,7 +261,7 @@
 
         .form-row input {
             display: block;
-            width: 97%;
+            width: 70px;
             padding: 0 10px;
             line-height: 6.48vh;
             font-family: 'Montserrat', sans-serif;
@@ -289,46 +301,14 @@
             color: #F77A52;
         }
 
-        .ui-form input[type="submit"] {
-            width: 100%;
-            padding: 0;
-            line-height: 42px;
-            background: #4a90e2;
-            border-width: 0;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            font-size: 20px;
-        }
 
-        .ui-form p {
-            margin: 0;
-            padding-top: 1.62vh;
-        }
-
-        /*
-        .superbutton {
-        width:150px;
-        height:40px;
-        border-radius:20px;
-        background:#459DE5;
-        color:#fff;
-        font-size:18px;
-        cursor:pointer;
-        }
-        .superbutton:hover{
-        background:#358DE5;
-        }
-        .superbutton:focus{
-        outline:none;
-        }
-        */
         #bottom {
             height: 8.1vh;
         }
 
         .buttonOk {
-            text-align: center;
+            text-align: left;
+            margin-left: -20px;
         }
 
         .floating-button {
@@ -390,10 +370,8 @@
                 </li>
                 <li><a href="" class="submenu-link">Statistics</a>
                     <ul class="submenu">
-                        <li><a href="">All products</a></li>
-                        <li><a href="">All products in group</a></li>
-                        <li><a href="">Total cost</a></li>
-                        <li><a href="">Total cost in group</a></li>
+                        <li><a href="http://localhost:8080/Store/allProducts">All products</a></li>
+                        <li><a href="http://localhost:8080/Store/allProductsInGroup">All products in group</a></li>
                     </ul>
                 </li>
             </ul>
@@ -403,33 +381,60 @@
 </div>
 
 <div id="mainDiv">
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
-        </select>
+    <div id="filters">
+        <div class="groupSelection">
+            <select class="selection" size="1" multiple>
+                <option value="group1">Group 1</option>
+            </select>
+        </div>
+        <div class="groupSelection">
+            <select class="selection" size="1" multiple>
+                <option value="name1">Name 1</option>
+            </select>
+        </div>
+        <div class="groupSelection">
+            <select class="selection" size="1" multiple>
+                <option value="description1">Description 1</option>
+            </select>
+        </div>
+
+        <div class="amount">
+            <div class="amountLabel">Amount&nbsp; &nbsp;</div>
+            <div class="amountFrom">
+                <div class="form-row"><input type="number" id="amountFromId" required autocomplete="off"><label
+                        for="amountFromId">from</label></div>
+            </div>
+            <div class="amountTo">
+                <div class="form-row"><input type="number" id="amountToId" required autocomplete="off"><label
+                        for="amountToId">to</label></div>
+            </div>
+        </div>
+
+        <div class="price">
+            <div class="priceLabel">Price&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
+            <div class="priceFrom">
+                <div class="form-row"><input type="number" id="priceFromId" required autocomplete="off"><label
+                        for="priceFromId">from</label></div>
+            </div>
+            <div class="priceTo">
+                <div class="form-row"><input type="number" id="priceToId" required autocomplete="off"><label
+                        for="priceToId">to</label></div>
+            </div>
+        </div>
+
+        <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
+            <a href="" class="floating-button">Search</a>
+        </div>
     </div>
-    <div class="form-row">
-        <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
+
+    <div id="result">
+        <div class="allProducts">,ktjhtgrfd yntgrfvdcsax yntrbfvcsx
+        </div>
     </div>
-    <div class="form-row">
-        <input type="text" id="description" required autocomplete="off"><label for="description">Description</label>
-    </div>
-    <div class="form-row">
-        <input type="text" id="manufacturer" required autocomplete="off"><label for="manufacturer">Manufacturer</label>
-    </div>
-    <div class="form-row">
-        <input type="number" id="amount" required autocomplete="off"><label for="amount">Amount</label>
-    </div>
-    <div class="form-row">
-        <input type="number" id="price" required autocomplete="off"><label for="price">Price</label>
-    </div>
+
 </div>
 
 <div id="bottom">
-    <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button">Ok</a>
-    </div>
 </div>
 
 </body>

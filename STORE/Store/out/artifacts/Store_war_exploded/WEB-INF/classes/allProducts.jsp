@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Liza
   Date: 24.06.2021
-  Time: 08:22
+  Time: 10:25
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,17 +13,16 @@
     <title>Store</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <style>
-        * {
-            padding: 0;
-            margin: 0;
+        *{
+            padding:0;
+            margin:0;
         }
 
-        body {
+        body{
             align-items: center;
             justify-content: center;
             background-color: #BFD7EA;
@@ -72,32 +71,28 @@
         }
 
 
+
+
         header {
             background: white;
             text-align: center;
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
         }
-
         header a {
             display: block;
             text-decoration: none;
             outline: none;
             transition: .3s ease-in-out;
         }
-
         nav {
             display: table;
             margin: 0 auto;
         }
-
         nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
-
-        nav li a {
+        nav li a{
             margin-left: 1.642vw;
             margin-right: 0.821vw;
         }
@@ -109,13 +104,11 @@
             text-align: center;
             padding-left: 6.568vw;
         }
-
         .topmenu:after {
             content: "";
             display: table;
             clear: both;
         }
-
         .topmenu > li {
             width: 25%;
             float: left;
@@ -124,7 +117,6 @@
             font-size: 20px;
             font-weight: 400;
         }
-
         .topmenu > li > a {
             text-transform: uppercase;
             font-size: 14px;
@@ -132,18 +124,13 @@
             color: #404040;
             padding: 15px 30px;
         }
-
-        .topmenu li a:hover {
-            color: #D5B45B;
-        }
-
+        .topmenu li a:hover {color: #D5B45B;}
         .submenu-link:after {
             content: "\f107";
             font-family: "FontAwesome";
             color: inherit;
             margin-left: 10px;
         }
-
         .submenu {
             background: #273037;
             position: absolute;
@@ -153,136 +140,48 @@
             width: 14.778325vw;
             opacity: 0;
             transform: scaleY(0);
-            transform-origin: 0 0;
+            transform-origin :0 0;
             transition: .5s ease-in-out;
         }
-
         .submenu a {
             color: white;
             text-align: left;
             padding: 12px 15px;
             font-size: 13px;
-            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            border-bottom: 1px solid rgba(255,255,255,.1);
         }
-
         .submenu li:last-child a {
             border-bottom: none;
         }
-
         .topmenu > li:hover .submenu {
             opacity: 1;
             transform: scaleY(1);
         }
 
 
+
         #mainDiv {
             height: 64.82982vh;
             width: 82.1vw;
             margin: 0 auto;
-            margin-top: 6.483vh;
+            margin-top: 16.855vh;
         }
 
-        .groupSelection {
-            margin-bottom: 3.24vh;
-        }
-
-        .selection {
+        .allProducts {
+            width: 81.773399vw;
+            height: 48.62vh;
+            padding-top: 1.62vh;
+            padding-bottom: 1.62vh;
             border-radius: 5px;
             border: 2px solid #404040;
-            background-color: transparent;
+            background-color: white;
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
             font-size: 15px;
-            color: #9d959d;
-            padding: 10px;
-        }
-
-        .selection:focus {
-            outline: none;
+            color: #404040;
         }
 
 
-        .form-row {
-            position: relative;
-            margin-bottom: 3.24vh;
-        }
-
-        .form-row input {
-            display: block;
-            width: 97%;
-            padding: 0 10px;
-            line-height: 6.48vh;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            font-size: 15px;
-            background: none;
-            border-width: 0;
-            border-bottom: 2px solid #404040;
-            transition: all 0.2s ease;
-        }
-
-        .form-row label {
-            position: absolute;
-            left: 13px;
-            color: #9d959d;
-            font-size: 20px;
-            font-weight: 300;
-            transform: translateY(-35px);
-            transition: all 0.2s ease;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 400;
-            font-size: 15px;
-        }
-
-        .form-row input:focus {
-            outline: 0;
-            border-color: #F77A52;
-        }
-
-        .form-row input:focus + label, .form-row input:valid + label {
-            transform: translateY(-60px);
-            margin-left: -14px;
-            font-size: 14px;
-            font-weight: 400;
-            outline: 0;
-            border-color: #F77A52;
-            color: #F77A52;
-        }
-
-        #bottom {
-            height: 8.1vh;
-        }
-
-        .buttonOk {
-            text-align: center;
-        }
-
-        .floating-button {
-            text-decoration: none;
-            display: inline-block;
-            width: 11.5vw;
-            height: 7.3vh;
-            line-height: 7.3vh;
-            border-radius: 45px;
-            margin: 10px 20px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 15px;
-            text-transform: uppercase;
-            text-align: center;
-            letter-spacing: 3px;
-            font-weight: 600;
-            color: #524f4e;
-            background: white;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
-            transition: .3s;
-        }
-
-        .floating-button:hover {
-            background: #D5B45B;
-            box-shadow: 0 15px 20px rgba(213, 180, 91, .4);
-            color: white;
-            transform: translateY(-7px);
-        }
     </style>
 </head>
 
@@ -326,29 +225,7 @@
 </div>
 
 <div id="mainDiv">
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
-        </select>
-    </div>
-
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the product</option>
-            <option value="group1">Product 1</option>
-        </select>
-    </div>
-
-    <!--Amount that already exist - this amount-->
-    <div class="form-row">
-        <input type="number" id="amount" required autocomplete="off"><label for="amount">Write off some amount</label>
-    </div>
-</div>
-
-<div id="bottom">
-    <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button" onclick="deleteGroup()">Delete</a>
+    <div class="allProducts">
     </div>
 </div>
 
