@@ -82,6 +82,67 @@ function deleteGroup() {
     });
 }
 
+function updateProduct(){
+    var jsonData = new Object();
+    jsonData.command = "1";
+    jsonData.oldname = $('#oldname').val();
+    jsonData.gname = $('#gname').val();
+    jsonData.name = $('#name').val();
+    jsonData.description = $('#description').val();
+    jsonDataP.manufacturer = $('#manufacturer').val();
+    jsonDataP.amount = $('#amount').val();
+    jsonDataP.price = $('#price').val();
+
+    let jsonStr = JSON.stringify(jsonData);
+    $.ajax({
+        url: "http://localhost:8080/Store/updateProduct",
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("There is nothing to update. The product " + $('#oldname').val() + " not found");
+        }
+    });
+}
+
+function updateGroup() {
+    var jsonData = new Object();
+    jsonData.command = "1";
+    jsonData.gname = $('#gname').val();
+    jsonData.name = $('#name').val();
+    jsonData.description = $('#description').val();
+    let jsonStr = JSON.stringify(jsonData);
+    $.ajax({
+        url: "http://localhost:8080/Store/update",
+        type: 'POST',
+        data: jsonStr,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert("There is nothing to update. The group " + $('#gname').val() + " not found");
+        }
+    });
+}
+
 function createProduct() {
     let jsonDataP = new Object();
     jsonDataP.gname = $('#gname').val();

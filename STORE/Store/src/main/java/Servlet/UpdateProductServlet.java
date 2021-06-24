@@ -23,23 +23,21 @@ public class UpdateProductServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("There is doGet updateProduct");
-
         response.setContentType("text/html");
-        // List<Group> groups = Database.readGroups();
-        // request.setAttribute("groups", groups);
         RequestDispatcher dispatcher = request.getRequestDispatcher("updateProduct.jsp");
         if (dispatcher != null) {
             dispatcher.forward(request, response);
         }
     }
 
-    @Override
+
     /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         super.doPost(request, response);
     }*/
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("There is doGet");
+        System.out.println("There is doPost - update product");
         StringBuilder jb = new StringBuilder();
         String line = null;
 
@@ -52,14 +50,50 @@ public class UpdateProductServlet extends HttpServlet {
         }
 
         Database database = new Database();
-
-       // System.out.println("hello");
         try {
-     /*       JSONObject jsonObject = new JSONObject(jb.toString());
-            Group group = (Group) jsonObject.get("group");
+            JSONObject jsonObject = new JSONObject(jb.toString());
+            String oldname = jsonObject.getString("oldname");
+            List<Product> products = database.readProducts();
+            System.out.println("Step 120: ");
+            Product product = null;
+            System.out.println("Step 121: ");
+            for (int i = 0; i < products.size(); i++) {
+                System.out.println("Step 122: " + i + " of " + products.size());
+                if (oldname.equals(products.get(i).getName())) {
+                    product = products.get(i);
+                    System.out.println("group is found!");
+                    System.out.println(product);
+                }
+            }
+            System.out.println("Step 123: ");
+            if (product != null) {
+                int id = product.getId();
+                String gname = jsonObject.getString("gname");
+                String name = jsonObject.getString("name");
+                String description = jsonObject.getString("description");
+                String manufacturer = jsonObject.getString("manufacturer");
+                int amount = jsonObject.getInt("amount");
+                double price = jsonObject.getDouble("price");
 
-            System.out.println("-------------------------------" + group.toString());
-*/
+                List<Group> groups = database.readGroups();
+                Group group = null;
+                for (int i = 0; i < groups.size(); i++) {
+                    if (gname.equals(groups.get(i).getName())) {
+                        group = groups.get(i);
+                        System.out.println("group is found!");
+                        System.out.println(group);
+                    }
+                }
+                if(group!=null){
+                    int gId = group.getId();
+                    database.updateProduct(id, gId, name, description, manufacturer, amount, price);
+                    System.out.println("Product updated");
+                } else {
+                    System.out.println("There is no group with such name!");
+                }
+            } else {
+                System.out.println("There is no product with such name!");
+            }
         } catch (Exception e) {
             System.out.println(e.toString());
         }

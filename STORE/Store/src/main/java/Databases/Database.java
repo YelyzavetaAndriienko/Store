@@ -511,17 +511,23 @@ public class Database {
         }
     }
 
-    public static List<Product> getAllProductsFromGroup(int groupId) {
-        // Conn();
-        List<Product> productsFromGroup = new ArrayList<>();
+    public static ArrayList<Product> getAllProductsFromGroup(int groupId) {
+        System.out.println("start gId = " + groupId);
+        ArrayList<Product> productsFromGroup = new ArrayList<>();
+        System.out.println("start created list");
         try {
             PreparedStatement selectStatement = con.prepareStatement(
-                    "select * from " + productsTable + " where group_id = ?");
+                    "select * from " + productsTable + " where gId = ?");
+            System.out.println("1111");
             selectStatement.setInt(1, groupId);
+            System.out.println("set statement gId = " + groupId);
             //selectStatement.execute();
             final ResultSet resultSet = selectStatement.executeQuery();
+            System.out.println("RESULT set statement ");
             while (resultSet.next()) {
-                productsFromGroup.add(resultSetToProduct(resultSet));
+                Product p = resultSetToProduct(resultSet);
+                productsFromGroup.add(p);
+                System.out.println("product = " + p);
             }
             selectStatement.close();
             resultSet.close();

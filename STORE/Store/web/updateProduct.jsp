@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html lang="en">
 
 <head>
@@ -403,6 +402,9 @@
 
 <div id="mainDiv">
     <div class="form-row">
+        <input type="text" id="oldname" required autocomplete="off"><label for="oldname">Product name</label>
+    </div>
+    <div class="form-row">
         <input type="text" id="gname" required autocomplete="off"><label for="gname">Group name</label>
     </div>
     <div class="form-row">
@@ -424,7 +426,7 @@
 
 <div id="bottom">
     <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button">Ok</a>
+        <a href="" class="floating-button" onclick="updateProduct()">Ok</a>
     </div>
 </div>
 
