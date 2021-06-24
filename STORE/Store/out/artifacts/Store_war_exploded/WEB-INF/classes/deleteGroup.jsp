@@ -251,16 +251,16 @@
             <ul class="topmenu">
                 <li><a href="" class="submenu-link">Groups</a>
                     <ul class="submenu">
-                        <li><a href="">Create</a></li>
-                        <li><a href="">Update</a></li>
-                        <li><a href="">Delete</a></li>
+                        <li><a href="http://localhost:8080/Store">Create</a></li>
+                        <li><a href="http://localhost:8080/Store">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/delete">Delete</a></li>
                     </ul>
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
                     <ul class="submenu">
-                        <li><a href="">Create</a></li>
-                        <li><a href="">Update</a></li>
-                        <li><a href="">Delete</a></li>
+                        <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
+                        <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
+                        <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
                         <li><a href="">Add</a></li>
                         <li><a href="">Write off</a></li>
                         <li><a href="">Search</a></li>

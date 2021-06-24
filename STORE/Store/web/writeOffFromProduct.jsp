@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Liza
   Date: 24.06.2021
-  Time: 03:44
+  Time: 08:22
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -15,26 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Nunito:wght@200;300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="resources/script.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-          rel="stylesheet" type="text/css">
-    <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-          rel="stylesheet" type="text/css">
-
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <style>
         *{
@@ -204,9 +184,51 @@
             outline:none;
         }
 
-        #bottom {
-            height: 8.1vh;
+
+        .form-row {
+            position: relative;
+            margin-bottom: 3.24vh;
         }
+        .form-row input {
+            display: block;
+            width: 97%;
+            padding: 0 10px;
+            line-height: 6.48vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            background: none;
+            border-width: 0;
+            border-bottom: 2px solid #404040;
+            transition: all 0.2s ease;
+        }
+        .form-row label {
+            position: absolute;
+            left: 13px;
+            color: #9d959d;
+            font-size: 20px;
+            font-weight: 300;
+            transform: translateY(-35px);
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+        }
+        .form-row input:focus {
+            outline: 0;
+            border-color: #F77A52;
+        }
+        .form-row input:focus+label, .form-row input:valid+label {
+            transform: translateY(-60px);
+            margin-left: -14px;
+            font-size: 14px;
+            font-weight: 400;
+            outline: 0;
+            border-color: #F77A52;
+            color: #F77A52;
+        }
+
+
         .buttonOk {
             text-align: center;
         }
@@ -244,7 +266,6 @@
     <div id="div2">STORE</div>
     <div id="div3"></div>
 </div>
-
 <div id="menuDiv">
     <header>
         <nav>
@@ -261,8 +282,8 @@
                         <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
                         <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
                         <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
-                        <li><a href="">Add</a></li>
-                        <li><a href="">Write off</a></li>
+                        <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>
+                        <li><a href="http://localhost:8080/Store/writeOffFromProduct">Write off</a></li>
                         <li><a href="">Search</a></li>
                     </ul>
                 </li>
@@ -281,18 +302,30 @@
 </div>
 
 <div id="mainDiv">
+    <form>
         <div class="groupSelection">
             <select class="selection">
                 <option disabled selected>Choose the group</option>
                 <option value="group1">Group 1</option>
             </select>
         </div>
-</div>
 
-<div id="bottom">
-    <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button" onclick="deleteGroup()">Delete</a>
-    </div>
+        <div class="groupSelection">
+            <select class="selection">
+                <option disabled selected>Choose the product</option>
+                <option value="group1">Product 1</option>
+            </select>
+        </div>
+
+        <!--Amount that already exist - this amount-->
+        <div class="form-row">
+            <input type="number" id="amount" required autocomplete="off"><label for="amount">Write off some amount</label>
+        </div>
+
+        <div class="buttonOk">
+            <input type="submit" class="floating-button" value="Ok">
+        </div>
+    </form>
 </div>
 
 </body>
