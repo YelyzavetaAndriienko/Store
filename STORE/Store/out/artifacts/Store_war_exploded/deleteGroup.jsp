@@ -306,6 +306,8 @@
             <option value="group1">Group 1</option>
         </select>
     </div>
+
+    <input type="text" id="name" value="name" required autocomplete="off"><label for="name">Name</label>
 </div>
 
 <div id="bottom">

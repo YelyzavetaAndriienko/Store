@@ -56,8 +56,30 @@ function addGroup()
     serverConnectFunc(serverUrl, JSON.stringify(jsonData));
 }
 
-function goToDeleteGroup() {
+function deleteGroup() {
+    let jsonData = new Object();
+    jsonData.name = $('#name').val();
+    let jsonStr = JSON.stringify(jsonData);
 
+    $.ajax({
+        url: "http://localhost:8080/Store/delete",
+        type: 'DELETE',
+        data: jsonStr,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
 }
 
 function createProduct() {
