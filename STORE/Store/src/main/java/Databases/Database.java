@@ -131,6 +131,8 @@ public class Database {
             throw new NullPointerException("Enter correct amount of the product");
         if (product.getPrice() < 0)
             throw new NullPointerException("Enter correct price of the product");
+
+        System.out.println("Passed group ID" + product.getGId());
         Group readGroup = readGroup(product.getGId());
         if (readGroup == null) {
             throw new NullPointerException("There is no group with such id!");
@@ -185,12 +187,17 @@ public class Database {
             final PreparedStatement selectStatement = con.prepareStatement(
                     "select * from " + groupsTable + " where groupId = ?");
             selectStatement.setInt(1, id);
-            selectStatement.execute();
+            System.out.println("selectStatement " + selectStatement);
+            //selectStatement.execute();
+
             final ResultSet resultSet = selectStatement.executeQuery();
-            selectStatement.close();
+            System.out.println("selectStatement executed");
+
+            System.out.println("Step 130 - read all groups from database");
             if (resultSet.next()) {
                 Group group = resultSetToGroup(resultSet);
-                resultSet.close();
+               resultSet.close();
+               selectStatement.close();;
                 return group;
             } else return null;
         } catch (SQLException e) {
@@ -207,12 +214,13 @@ public class Database {
             final PreparedStatement selectStatement = con.prepareStatement(
                     "select * from " + productsTable + " where id = ?");
             selectStatement.setInt(1, id);
-            selectStatement.execute();
+            //selectStatement.execute();
             final ResultSet resultSet = selectStatement.executeQuery();
-            selectStatement.close();
+
             if (resultSet.next()) {
                 Product product = resultSetToProduct(resultSet);
                 resultSet.close();
+                selectStatement.close();
                 return product;
             } else return null;
         } catch (SQLException e) {
@@ -225,13 +233,21 @@ public class Database {
         //Conn();
         try (Statement st = con.createStatement();
              ResultSet resultSet = st.executeQuery("SELECT * FROM " + groupsTable)) {
+            System.out.println("Try: Select all groups from database");
             List<Group> groupsList = new ArrayList<>();
             while (resultSet.next()) {
-                groupsList.add(resultSetToGroup(resultSet));
+
+                Group g = resultSetToGroup(resultSet);
+                groupsList.add(g);
+                System.out.println("Next group :" + g);
+
             }
             st.close();
+            System.out.println("Try: all groups from database Selected");
             resultSet.close();
+
             return groupsList;
+
         } catch (SQLException e) {
             System.out.println("Invalid SQL request");
             throw new RuntimeException("Can't select groups", e);
@@ -502,7 +518,7 @@ public class Database {
             PreparedStatement selectStatement = con.prepareStatement(
                     "select * from " + productsTable + " where group_id = ?");
             selectStatement.setInt(1, groupId);
-            selectStatement.execute();
+            //selectStatement.execute();
             final ResultSet resultSet = selectStatement.executeQuery();
             while (resultSet.next()) {
                 productsFromGroup.add(resultSetToProduct(resultSet));
@@ -520,7 +536,7 @@ public class Database {
                 resultSet.getInt("groupId"),
                 resultSet.getString("groupName"),
                 resultSet.getString("groupDescription"));
-        resultSet.close();
+       // resultSet.close();
         return g;
     }
 
@@ -533,7 +549,7 @@ public class Database {
                 resultSet.getString("manufacturer"),
                 resultSet.getInt("amount"),
                 resultSet.getDouble("price"));
-        resultSet.close();
+       // resultSet.close();
         return p;
     }
 

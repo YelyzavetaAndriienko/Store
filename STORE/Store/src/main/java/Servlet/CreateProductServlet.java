@@ -59,15 +59,24 @@ public class CreateProductServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
 
             String gname = jsonObject.getString("gname");
+            System.out.println("Group name is " + gname);
+            System.out.println("Step 119: ");
             List<Group> groups = database.readGroups();
+            System.out.println("Step 120: ");
             Group group = null;
-
+            System.out.println("Step 121: ");
             for (int i = 0; i < groups.size(); i++) {
+                System.out.println("Step 122: " + i + " of " + groups.size());
                 if (gname.equals(groups.get(i).getName())) {
                     group = groups.get(i);
+                    System.out.println("group is found!");
+                    System.out.println(group);
                 }
             }
+            System.out.println("Step 123: ");
+            if(group!=null){
             int gId = group.getId();
+            System.out.println("Group ID" + gId);
             String name = jsonObject.getString("name");
             String description = jsonObject.getString("description");
             String manufacturer = jsonObject.getString("manufacturer");
@@ -75,9 +84,9 @@ public class CreateProductServlet extends HttpServlet {
             double price = jsonObject.getDouble("price");
 
             Product product = new Product(gId, name, description, manufacturer, amount, price);
-
+            System.out.println("Start adding product to database");
             database.createProduct(product);
-
+            System.out.println("product is added to database");
             System.out.println(product.toString());
             JSONObject jsonToReturn1 = new JSONObject();
             jsonToReturn1.put("answer", "ok");
@@ -93,8 +102,10 @@ public class CreateProductServlet extends HttpServlet {
 
                 fos.write(buffer, 0, buffer.length);
             } catch (IOException ex) {
-
                 System.out.println(ex.getMessage());
+            }
+            } else {
+                System.out.println("There is no group with such name");
             }
         } catch (Exception e) {
             System.out.println(e.toString());
