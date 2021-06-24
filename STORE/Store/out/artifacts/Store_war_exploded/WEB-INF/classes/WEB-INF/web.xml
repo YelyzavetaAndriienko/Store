@@ -11,13 +11,22 @@
         <servlet-class>Servlet.MainServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>CreateProductServlet</servlet-name>
+        <servlet-class>Servlet.CreateProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern></url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/resources/*</url-pattern>
+        <servlet-name>CreateProductServlet</servlet-name>
+        <url-pattern>/resourcesproducts/*</url-pattern>
     </servlet-mapping>
 
     <resource-ref>

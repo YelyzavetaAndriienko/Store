@@ -60,6 +60,20 @@ function goToDeleteGroup() {
 
 }
 
+function createProduct() {
+    var jsonData = new Object();
+    jsonData.command = "1";
+    jsonData.groupId = $('#groupId').val();
+    jsonData.name = $('#name').val();
+    jsonData.description = $('#description').val();
+    jsonData.manufacturer = $('#manufacturer').val();
+    jsonData.amount = $('#amount').val();
+    jsonData.price = $('#price').val();
+
+    let serverUrl = window.location.href;
+    serverConnectFunc(serverUrl, JSON.stringify(jsonData));
+}
+
 function changeFunc() {
     var selectBox = document.getElementById("selectBox");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;

@@ -14,15 +14,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 
-@WebServlet("/createProduct")
-public class СreateProductServlet extends HttpServlet {
+@WebServlet("/CreateProduct")
+public class CreateProductServlet extends HttpServlet {
     //private Database database;
     //private static Database database = new Database();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("There is doGet");
+        System.out.println("There is doGet - create product");
 
         response.setContentType("text/html");
         RequestDispatcher dispatcher = request.getRequestDispatcher("createProduct.jsp");
@@ -37,7 +37,7 @@ public class СreateProductServlet extends HttpServlet {
     }*/
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("There is doPost");
+        System.out.println("There is doPost - create product");
         StringBuilder jb = new StringBuilder();
         String line = null;
 
@@ -50,7 +50,6 @@ public class СreateProductServlet extends HttpServlet {
         }
 
         Database database = new Database();
-        database.deleteGroups();
         try {
             JSONObject jsonObject = new JSONObject(jb.toString());
 
