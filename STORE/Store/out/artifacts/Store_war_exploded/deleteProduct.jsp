@@ -185,6 +185,9 @@
     }
 
 
+    #bottom {
+      height: 8.1vh;
+    }
     .buttonOk {
       text-align: center;
     }
@@ -218,7 +221,7 @@
 
 <body>
 <div id="titleDiv">
-  <div id="div1"><img id="titleImage" src="resources/" align="center"/></div>
+  <div id="div1"><img id="titleImage" src="resources/logo.png" align="center"/></div>
   <div id="div2">STORE</div>
   <div id="div3"></div>
 </div>
@@ -239,8 +242,8 @@
             <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
             <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
             <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
-            <li><a href="">Add</a></li>
-            <li><a href="">Write off</a></li>
+            <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>
+            <li><a href="http://localhost:8080/Store/writeOffFromProduct">Write off</a></li>
             <li><a href="">Search</a></li>
           </ul>
         </li>
@@ -259,7 +262,6 @@
 </div>
 
 <div id="mainDiv">
-  <form>
     <div class="groupSelection">
       <select class="selection">
         <option disabled selected>Choose the group</option>
@@ -274,10 +276,12 @@
       </select>
     </div>
 
-    <div class="buttonOk">
-      <input type="submit" class="floating-button" value="Delete">
-    </div>
-  </form>
+</div>
+
+<div id="bottom">
+  <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
+    <a href="" class="floating-button" onclick="deleteGroup()">Delete</a>
+  </div>
 </div>
 
 </body>

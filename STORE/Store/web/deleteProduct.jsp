@@ -185,6 +185,9 @@
     }
 
 
+    #bottom {
+      height: 8.1vh;
+    }
     .buttonOk {
       text-align: center;
     }
@@ -259,7 +262,6 @@
 </div>
 
 <div id="mainDiv">
-  <form>
     <div class="groupSelection">
       <select class="selection">
         <option disabled selected>Choose the group</option>
@@ -274,10 +276,12 @@
       </select>
     </div>
 
-    <div class="buttonOk">
-      <input type="submit" class="floating-button" value="Delete">
-    </div>
-  </form>
+</div>
+
+<div id="bottom">
+  <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
+    <a href="" class="floating-button" onclick="deleteGroup()">Delete</a>
+  </div>
 </div>
 
 </body>

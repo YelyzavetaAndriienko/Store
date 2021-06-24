@@ -261,8 +261,8 @@
                         <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
                         <li><a href="http://localhost:8080/Store/createProduct">Update</a></li>
                         <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
-                        <li><a href="">Add</a></li>
-                        <li><a href="">Write off</a></li>
+                        <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>
+                        <li><a href="http://localhost:8080/Store/writeOffFromProduct">Write off</a></li>
                         <li><a href="">Search</a></li>
                     </ul>
                 </li>
