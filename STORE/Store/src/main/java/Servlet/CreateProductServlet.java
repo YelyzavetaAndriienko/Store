@@ -34,10 +34,6 @@ public class CreateProductServlet extends HttpServlet {
     }
 
     @Override
-    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
-    }*/
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("There is doPost - create product");
         StringBuilder jb = new StringBuilder();

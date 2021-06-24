@@ -373,7 +373,7 @@
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
                     <ul class="submenu">
-                        <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
+                        <li><a href="http://localhost:8080/Store/CreateProduct">Create</a></li>
                         <li><a href="http://localhost:8080/Store/updateProduct">Update</a></li>
                         <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
                         <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>

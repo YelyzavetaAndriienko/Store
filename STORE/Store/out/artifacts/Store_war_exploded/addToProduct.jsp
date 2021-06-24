@@ -18,6 +18,21 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="resources/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+          rel="stylesheet" type="text/css">
+    <link href="https://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+          rel="stylesheet" type="text/css">
+
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <style>
         * {
             padding: 0;
@@ -307,7 +322,7 @@
                 </li>
                 <li><a href="" class="submenu-link">Products</a>
                     <ul class="submenu">
-                        <li><a href="http://localhost:8080/Store/createProduct">Create</a></li>
+                        <li><a href="http://localhost:8080/Store/CreateProduct">Create</a></li>
                         <li><a href="http://localhost:8080/Store/updateProduct">Update</a></li>
                         <li><a href="http://localhost:8080/Store/deleteProduct">Delete</a></li>
                         <li><a href="http://localhost:8080/Store/addToProduct">Add</a></li>
@@ -334,13 +349,13 @@
 
     <!--This amount + amount that already exist-->
     <div class="form-row">
-        <input type="number" id="amount" required autocomplete="off"><label for="amount">Add some amount</label>
+        <input type="number" id="amountToAdd" required autocomplete="off"><label for="amountToAdd">Add some amount</label>
     </div>
 </div>
 
 <div id="bottom">
     <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button" onclick="deleteGroup()">Delete</a>
+        <a href="" class="floating-button" onclick="addToProduct()">Add</a>
     </div>
 </div>
 

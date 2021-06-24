@@ -34,10 +34,6 @@ public class DeleteGroupServlet extends HttpServlet {
     }
 
     @Override
-    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
-    }*/
-
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("There is doPost for delete");
         StringBuilder jb = new StringBuilder();
@@ -65,7 +61,7 @@ public class DeleteGroupServlet extends HttpServlet {
                     g = groupsList.get(i);
                 }
             }
-
+            if(g!=null){
             System.out.println(g);
             database.deleteGroup(g.getId());
             JSONObject jsonToReturn1 = new JSONObject();
@@ -74,7 +70,9 @@ public class DeleteGroupServlet extends HttpServlet {
             System.out.println(jsonToReturn1.toString());
 
             System.out.println(database.readGroups());
-
+        } else {
+            System.out.println("There is no group with such name");
+        }
         } catch (Exception e) {
             System.out.println(e.toString());
         }
