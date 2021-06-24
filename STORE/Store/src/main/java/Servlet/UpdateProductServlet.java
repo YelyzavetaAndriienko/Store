@@ -22,7 +22,7 @@ public class UpdateProductServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("There is doGet");
+        System.out.println("There is doGet updateProduct");
 
         response.setContentType("text/html");
         // List<Group> groups = Database.readGroups();

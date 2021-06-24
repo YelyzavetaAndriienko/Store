@@ -8,7 +8,7 @@ import Models.User;
 import java.io.IOException;
 
 public class Tester {
-
+/*
     public static void main(String[] args) throws IOException {
         Database database = new Database();
 
@@ -25,5 +25,5 @@ public class Tester {
         database.createProduct(product3);
 
         new Server(7777, database);
-    }
+    }*/
 }

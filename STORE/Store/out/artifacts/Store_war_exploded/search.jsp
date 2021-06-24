@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en">
 
 <head>
@@ -233,24 +234,51 @@
             color: #404040;
         }
 
-
-        .groupSelection {
+        .form-rowS {
+            position: relative;
             margin-bottom: 3.24vh;
         }
 
-        .selection {
-            border-radius: 5px;
-            border: 2px solid #404040;
-            background-color: transparent;
+        .form-rowS input {
+            display: block;
+            width: 21.34647vw;
+            padding: 0 10px;
+            line-height: 6.48vh;
             font-family: 'Montserrat', sans-serif;
             font-weight: 400;
             font-size: 15px;
-            color: #9d959d;
-            padding: 10px;
+            background: none;
+            border-width: 0;
+            border-bottom: 2px solid #404040;
+            transition: all 0.2s ease;
         }
 
-        .selection:focus {
-            outline: none;
+        .form-rowS label {
+            position: absolute;
+            left: 13px;
+            color: #9d959d;
+            font-size: 20px;
+            font-weight: 300;
+            transform: translateY(-35px);
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .form-rowS input:focus {
+            outline: 0;
+            border-color: #F77A52;
+        }
+
+        .form-rowS input:focus + label, .form-rowS input:valid + label {
+            transform: translateY(-60px);
+            margin-left: -14px;
+            font-size: 14px;
+            font-weight: 400;
+            outline: 0;
+            border-color: #F77A52;
+            color: #F77A52;
         }
 
 
@@ -261,7 +289,7 @@
 
         .form-row input {
             display: block;
-            width: 70px;
+            width: 5.747vw;
             padding: 0 10px;
             line-height: 6.48vh;
             font-family: 'Montserrat', sans-serif;
@@ -382,20 +410,14 @@
 
 <div id="mainDiv">
     <div id="filters">
-        <div class="groupSelection">
-            <select class="selection" size="1" multiple>
-                <option value="group1">Group 1</option>
-            </select>
+        <div class="form-rowS">
+            <input type="text" id="gname" required autocomplete="off"><label for="gname">Group name</label>
         </div>
-        <div class="groupSelection">
-            <select class="selection" size="1" multiple>
-                <option value="name1">Name 1</option>
-            </select>
+        <div class="form-rowS">
+            <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
         </div>
-        <div class="groupSelection">
-            <select class="selection" size="1" multiple>
-                <option value="description1">Description 1</option>
-            </select>
+        <div class="form-rowS">
+            <input type="text" id="description" required autocomplete="off"><label for="description">Description</label>
         </div>
 
         <div class="amount">
@@ -428,7 +450,7 @@
     </div>
 
     <div id="result">
-        <div class="allProducts">,ktjhtgrfd yntgrfvdcsax yntrbfvcsx
+        <div class="allProducts">
         </div>
     </div>
 

@@ -99,24 +99,6 @@ public class Database {
         }
     }
 
-    public static User createUser(User user) {
-        try (PreparedStatement statement = con.prepareStatement("INSERT INTO users('login', 'password') VALUES (?, ?)")) {
-            statement.setString(1, user.getLogin());
-            statement.setString(2, DigestUtils.md5Hex(user.getPassword()));
-            statement.executeUpdate();
-            ResultSet resultSet = statement.getGeneratedKeys();
-            user.setId(resultSet.getInt("last_insert_rowid()"));
-            con.commit();
-            statement.close();
-            resultSet.close();
-            return user;
-        } catch (SQLException e) {
-            System.out.println("Can't insert user");
-            e.printStackTrace();
-            throw new RuntimeException("Can't insert user", e);
-        }
-    }
-
     public static Group createGroup(Group group) {
         if (group.getName().equals(""))
             throw new NullPointerException("Enter correct name of the group");

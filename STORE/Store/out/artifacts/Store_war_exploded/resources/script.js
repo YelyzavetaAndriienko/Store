@@ -83,17 +83,35 @@ function deleteGroup() {
 }
 
 function createProduct() {
-    var jsonData = new Object();
-    jsonData.command = "1";
-    jsonData.groupId = $('#groupId').val();
-    jsonData.name = $('#name').val();
-    jsonData.description = $('#description').val();
-    jsonData.manufacturer = $('#manufacturer').val();
-    jsonData.amount = $('#amount').val();
-    jsonData.price = $('#price').val();
+    let jsonDataP = new Object();
+    jsonDataP.gname = $('#gname').val();
+    jsonDataP.name = $('#name').val();
+    jsonDataP.description = $('#description').val();
+    jsonDataP.manufacturer = $('#manufacturer').val();
+    jsonDataP.amount = $('#amount').val();
+    jsonDataP.price = $('#price').val();
 
-    let serverUrl = window.location.href;
-    serverConnectFunc(serverUrl, JSON.stringify(jsonData));
+    let jsonStrP = JSON.stringify(jsonDataP);
+
+    $.ajax({
+        url: "http://localhost:8080/Store/CreateProduct",
+        type: 'POST',
+        data: jsonStrP,
+        dataType: 'json',
+        async: true,
+
+        success: function (event) {
+            switch (event["answer"])
+            {
+                case "ok":
+                    alert("success");
+                    break;
+            }
+        },
+        error: function (xhr, status, error) {
+            alert(error);
+        }
+    });
 }
 
 function changeFunc() {

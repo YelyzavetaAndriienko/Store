@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en">
 
 <head>
@@ -401,17 +402,8 @@
 </div>
 
 <div id="mainDiv">
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the product</option>
-            <option value="group1" id="product">Product 1</option>
-        </select>
-    </div>
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
-        </select>
+    <div class="form-row">
+        <input type="text" id="gname" required autocomplete="off"><label for="gname">Group name</label>
     </div>
     <div class="form-row">
         <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>

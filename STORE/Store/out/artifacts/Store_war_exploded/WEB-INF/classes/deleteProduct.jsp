@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en">
 
 <head>
@@ -182,8 +183,117 @@
             margin-top: 6.483vh;
         }
 
+        .ui-form {
+            max-width: 350px;
+            padding: 80px 30px 30px;
+            margin: 50px auto 30px;
+            background: white;
+        }
+
+        .ui-form h3 {
+            position: relative;
+            z-index: 5;
+            margin: 0 0 60px;
+            text-align: center;
+            color: #4a90e2;
+            font-size: 30px;
+            font-weight: normal;
+        }
+
+        .ui-form h3:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 4.9261vw;
+            top: -4.862vh;
+            width: 8.21vw;
+            height: 16.2vw;
+            border-radius: 50%;
+            background: #fee8e4;
+        }
+
+        .ui-form h3:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            right: 4.1vw;
+            top: -6.48vh;
+            width: 0;
+            height: 0;
+            border-left: 4.5vw solid transparent;
+            border-right: 4.5vw solid transparent;
+            border-bottom: 8.9vh solid #ffe3b5;
+        }
+
+        .form-row {
+            position: relative;
+            margin-bottom: 3.24vh;
+        }
+
+        .form-row input {
+            display: block;
+            width: 97%;
+            padding: 0 10px;
+            line-height: 6.48vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            background: none;
+            border-width: 0;
+            border-bottom: 2px solid #404040;
+            transition: all 0.2s ease;
+        }
+
+        .form-row label {
+            position: absolute;
+            left: 13px;
+            color: #9d959d;
+            font-size: 20px;
+            font-weight: 300;
+            transform: translateY(-35px);
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .form-row input:focus {
+            outline: 0;
+            border-color: #F77A52;
+        }
+
+        .form-row input:focus + label, .form-row input:valid + label {
+            transform: translateY(-60px);
+            margin-left: -14px;
+            font-size: 14px;
+            font-weight: 400;
+            outline: 0;
+            border-color: #F77A52;
+            color: #F77A52;
+        }
+
+        .ui-form input[type="submit"] {
+            width: 100%;
+            padding: 0;
+            line-height: 42px;
+            background: #4a90e2;
+            border-width: 0;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 20px;
+        }
+
+        .ui-form p {
+            margin: 0;
+            padding-top: 1.62vh;
+        }
         .groupSelection {
             margin-bottom: 3.24vh;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #404040;
         }
 
         .selection {
@@ -281,19 +391,12 @@
 
 <div id="mainDiv">
     <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
-        </select>
+        Enter the name of the product to delete
     </div>
 
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the product</option>
-            <option value="group1">Product 1</option>
-        </select>
+    <div class="form-row">
+        <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
     </div>
-
 </div>
 
 <div id="bottom">

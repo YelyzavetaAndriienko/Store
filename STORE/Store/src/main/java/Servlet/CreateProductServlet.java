@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 
+import static Databases.CommonDB.database;
+
 @WebServlet("/CreateProduct")
 public class CreateProductServlet extends HttpServlet {
     //private Database database;
@@ -56,58 +58,43 @@ public class CreateProductServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
 
-            int command = jsonObject.getInt("command");
+            String gname = jsonObject.getString("gname");
+            List<Group> groups = database.readGroups();
+            Group group = null;
 
-            switch (command) {
+            for (int i = 0; i < groups.size(); i++) {
+                if (gname.equals(groups.get(i).getName())) {
+                    group = groups.get(i);
+                }
+            }
+            int gId = group.getId();
+            String name = jsonObject.getString("name");
+            String description = jsonObject.getString("description");
+            String manufacturer = jsonObject.getString("manufacturer");
+            int amount = jsonObject.getInt("amount");
+            double price = jsonObject.getDouble("price");
 
-                case 0: //get all groups
+            Product product = new Product(gId, name, description, manufacturer, amount, price);
 
-                    List<Product> names = Database.readProducts();
+            database.createProduct(product);
 
-                    JSONObject jsonToReturn0 = new JSONObject();
-                    jsonToReturn0.put("answer", "names");
-                    jsonToReturn0.put("list", names.toString());
-                    out.println(jsonToReturn0.toString());
+            System.out.println(product.toString());
+            JSONObject jsonToReturn1 = new JSONObject();
+            jsonToReturn1.put("answer", "ok");
+            out.println(jsonToReturn1.toString());
+            System.out.println(jsonToReturn1.toString());
 
-                    break;
+            System.out.println(database.readProducts());
 
-                case 1: //create group
+            String text = jsonToReturn1.toString() + "\n  ------- \n" + product.toString();
 
-                    int gId = jsonObject.getInt("groupId");
-                    String name = jsonObject.getString("name");
-                    String description = jsonObject.getString("description");
-                    String manufacturer = jsonObject.getString("manufacturer");
-                    int amount = jsonObject.getInt("amount");
-                    double price = jsonObject.getDouble("price");
+            try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Liza\\Documents\\notes.txt")) {
+                byte[] buffer = text.getBytes();
 
-                    Product product = new Product(gId, name, description, manufacturer, amount, price);
+                fos.write(buffer, 0, buffer.length);
+            } catch (IOException ex) {
 
-                    Database.createProduct(product);
-
-                    System.out.println(product);
-                    JSONObject jsonToReturn1 = new JSONObject();
-                    jsonToReturn1.put("answer", "ok");
-                    out.println(jsonToReturn1.toString());
-                    System.out.println(jsonToReturn1.toString());
-
-                    System.out.println(database.readGroups());
-
-                    String text = jsonToReturn1.toString() + "\n  ------- \n" + product.toString();
-
-                    try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Liza\\Documents\\notes.txt")) {
-                        // перевод строки в байты
-                        byte[] buffer = text.getBytes();
-
-                        fos.write(buffer, 0, buffer.length);
-                    } catch (IOException ex) {
-
-                        System.out.println(ex.getMessage());
-                    }
-
-                default:
-                    System.out.println("default switch");
-                    break;
-
+                System.out.println(ex.getMessage());
             }
         } catch (Exception e) {
             System.out.println(e.toString());

@@ -17,6 +17,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import Models.User;
 
 public class Server {
+    /*
     private static HttpServer httpServer;
     private static Database database;
     private static ObjectMapper objectMapper = new ObjectMapper();
@@ -34,7 +35,7 @@ public class Server {
         httpServer.start();
 
         httpServer.createContext("/", Server::rootHandler)
-                /*.setAuthenticator(new MyAuthenticator())*/;
+                .setAuthenticator(new MyAuthenticator());
     }
 
     private static void rootHandler(HttpExchange exchange) throws IOException {
@@ -203,5 +204,5 @@ public class Server {
             }
             return new Failure(403);
         }
-    }
+    }*/
 }

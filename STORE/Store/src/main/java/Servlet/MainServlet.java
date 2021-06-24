@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 
+import static Databases.CommonDB.database;
+
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
     //private Database database;
@@ -22,7 +24,7 @@ public class MainServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("There is doGet");
+        System.out.println("There is doGet main");
 
         response.setContentType("text/html");
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
@@ -37,7 +39,7 @@ public class MainServlet extends HttpServlet {
     }*/
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("There is doPost");
+        System.out.println("There is doPost main");
         StringBuilder jb = new StringBuilder();
         String line = null;
 

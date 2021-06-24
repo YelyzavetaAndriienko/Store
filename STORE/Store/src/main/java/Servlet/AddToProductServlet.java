@@ -22,7 +22,7 @@ public class AddToProductServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("There is doGet");
+        System.out.println("There is doGet addToProduct");
 
         response.setContentType("text/html");
         // List<Product> products = Database.readProducts();

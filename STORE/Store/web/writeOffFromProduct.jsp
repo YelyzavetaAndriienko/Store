@@ -326,18 +326,8 @@
 </div>
 
 <div id="mainDiv">
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the group</option>
-            <option value="group1">Group 1</option>
-        </select>
-    </div>
-
-    <div class="groupSelection">
-        <select class="selection">
-            <option disabled selected>Choose the product</option>
-            <option value="group1">Product 1</option>
-        </select>
+    <div class="form-row">
+        <input type="text" id="name" required autocomplete="off"><label for="name">Name</label>
     </div>
 
     <!--Amount that already exist - this amount-->
