@@ -496,7 +496,7 @@
 
 <div id="bottom">
     <div class="buttonOk"><!--<input type="submit" class="superbutton" value="Ok">-->
-        <a href="" class="floating-button">Ok</a>
+        <a href="" class="floating-button" onclick="updateGroup()">Ok</a>
     </div>
 </div>
 

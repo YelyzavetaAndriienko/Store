@@ -79,6 +79,7 @@ public class AllProductsInGroup extends HttpServlet {
                 }
                 /*response.setContentType("text/html");
                 PrintWriter out1 = response.getWriter();
+
                 // send HTML page to client
                 out1.println("<html>");
                 out1.println("<head><title>A Test Servlet</title></head>");

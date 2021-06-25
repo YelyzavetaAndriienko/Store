@@ -521,8 +521,8 @@
         </div>
     </div>
 
-    <div class="allProducts">
-    </div>
+    <div class="allProducts"></div>
+    <script src="resources/showProducts.js"></script>
 </div>
 
 <div id="bottom">
