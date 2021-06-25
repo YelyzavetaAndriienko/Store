@@ -196,8 +196,9 @@ public class Database {
             System.out.println("Step 130 - read all groups from database");
             if (resultSet.next()) {
                 Group group = resultSetToGroup(resultSet);
-               resultSet.close();
-               selectStatement.close();;
+                resultSet.close();
+                selectStatement.close();
+                ;
                 return group;
             } else return null;
         } catch (SQLException e) {
@@ -511,17 +512,23 @@ public class Database {
         }
     }
 
-    public static List<Product> getAllProductsFromGroup(int groupId) {
-        // Conn();
-        List<Product> productsFromGroup = new ArrayList<>();
+    public static ArrayList<Product> getAllProductsFromGroup(int groupId) {
+        System.out.println("start gId = " + groupId);
+        ArrayList<Product> productsFromGroup = new ArrayList<>();
+        System.out.println("start created list");
         try {
             PreparedStatement selectStatement = con.prepareStatement(
-                    "select * from " + productsTable + " where group_id = ?");
+                    "select * from " + productsTable + " where gId = ?");
+            System.out.println("1111");
             selectStatement.setInt(1, groupId);
+            System.out.println("set statement gId = " + groupId);
             //selectStatement.execute();
             final ResultSet resultSet = selectStatement.executeQuery();
+            System.out.println("RESULT set statement ");
             while (resultSet.next()) {
-                productsFromGroup.add(resultSetToProduct(resultSet));
+                Product p = resultSetToProduct(resultSet);
+                productsFromGroup.add(p);
+                System.out.println("product = " + p);
             }
             selectStatement.close();
             resultSet.close();
@@ -536,7 +543,7 @@ public class Database {
                 resultSet.getInt("groupId"),
                 resultSet.getString("groupName"),
                 resultSet.getString("groupDescription"));
-       // resultSet.close();
+        // resultSet.close();
         return g;
     }
 
@@ -549,7 +556,7 @@ public class Database {
                 resultSet.getString("manufacturer"),
                 resultSet.getInt("amount"),
                 resultSet.getDouble("price"));
-       // resultSet.close();
+        // resultSet.close();
         return p;
     }
 
@@ -642,38 +649,28 @@ public class Database {
 
 /*
         database.updateGroup(group3.getId(), "shoes", "12345");
-
         GroupFilter filterG = new GroupFilter(null, "smth");
         System.out.println(database.listByCriteriaGroup(filterG));
-
         System.out.println(database.listByCriteriaGroup(new GroupFilter(null, null)));
-
         //database.deleteGroup(database.readGroup(group3.getId()).getName());
         //database.deleteGroups();
-
         //System.out.println(database.readGroups());
-
         Product product1 = new Product(group1.getId(), "prod1", "smth", "Ukr", 5, 23.30);
         Product product2 = new Product(group2.getId(), "prod2", "smth2", "Ekvador", 2, 33.0);
         Product product3 = new Product(group1.getId(), "other", "smthothe", "ua", 10, 104.21);
-
         database.createProduct(product1);
         database.createProduct(product2);
         database.createProduct(product3);*/
 /*
         System.out.println(database.readProducts());
         database.updateProduct(product3.getId(), 4, "appleUPD", "smth1UPD", "UkraineUPD", 100, 0.1);
-
         ProductFilter filter = new ProductFilter("prod", null, null, null, null, null, null);
         System.out.println(database.listByCriteriaProduct(filter));
-
         System.out.println(database.listByCriteriaProduct(new ProductFilter(null, null, null, null, null, null, null)));
         //database.deleteProduct(database.readGroup(group3.getId()).getName());
         //database.deleteGroups();
-
         System.out.println(database.readProducts());
         System.out.println("------------------------------------");
-
         database.deleteGroup(group1.getId());
         System.out.println(database.readProducts());*/
     }
